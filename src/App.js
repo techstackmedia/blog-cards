@@ -1,23 +1,66 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 function App() {
+  useEffect(() => {
+    void getAllRestaurants();
+  }, []);
+
+  const [restaurants, setRestaurants] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const getAllRestaurants = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${BASE_URL}/restaurants`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Error in fetching all restaurants');
+      }
+      const json = await response.json();
+      setRestaurants(json);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (error) {
+    return <p>{error}</p>
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='blog-container'>
+      {
+        restaurants?.data.map((item) => {
+          const cardTitle = item.attributes.Name;
+          const cardDescription = item.attributes.Description[0].children[0].text
+
+          return (
+            <div key={item.id} className='blog-card'>
+              <div className='blog-card-image'>
+                <p className='blog-card-title'>{cardTitle}</p>
+              </div>
+              <div className='blog-card-content'>
+                <h2 className='blog-card-title'>{cardTitle}</h2>
+                <p className='blog-card-description'>{cardDescription}</p>
+              </div>
+            </div>
+          )
+        })
+      }
     </div>
   );
 }
