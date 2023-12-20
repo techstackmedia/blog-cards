@@ -1,3 +1,9 @@
+a {
+  text-decoration: none;
+  color: #555;
+  font-size: 16px;
+}
+
 .blog-container {
   display: flex;
   justify-content: space-around;
@@ -21,7 +27,7 @@
   background-color: #00005cde;
   position: relative;
   background-image: url(http://www.pngmart.com/files/13/Pattern-Transparent-Background.png);
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -57,6 +63,27 @@
 
 .blog-card-description {
   color: #555;
+}
+
+.blog-card-link {
+  margin-inline: auto;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid #00005cde;
+  background-color: transparent;
+  text-decoration: none;
+  font-size: 14px;
+  color: #000;
+}
+
+.blog-card-link:hover {
+  background-color: #00005cde;
+  color: #fff;
+  cursor: pointer;
 }
 
 @media (min-width: 0) {
