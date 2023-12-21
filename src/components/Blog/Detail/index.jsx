@@ -1,50 +1,53 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import './styles.css';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const BlogDetail = () => {
-    const {id} = useParams()
-    useEffect(() => {
-        void getRestaurantsPost()
+  const { id } = useParams();
+  useEffect(() => {
+    void getRestaurantsPost();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  }, []);
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
-    const [detailPost, setDetailPost]  = useState(null)
-    const getRestaurantsPost = async () => {
-        setIsLoading(true)
-        try {
-            const response = await fetch(`${BASE_URL}/restaurants/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            if (!response.ok) {
-                throw new Error(`Error in getting blog post with id of ${id}`);
-            }
-            const json = await response.json()
-            setDetailPost(json)
-        } catch(e) {
-            setError(e.message)
-        } finally {
-            setIsLoading(false)
-        }
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [detailPost, setDetailPost] = useState(null);
+  const getRestaurantsPost = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${BASE_URL}/restaurants/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`Error in getting blog post with id of ${id}`);
+      }
+      const json = await response.json();
+      setDetailPost(json);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    if (error) {
-        return <p>{error}</p>
-    }
+  if (error) {
+    return <p>{error}</p>;
+  }
 
-    if (isLoading) {
-        return <p>Loading</p>
-    }
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
 
   return (
     <div>
-      <p><Link to='/'>&lt; Back</Link></p>
+      <p>
+        <Link to='/'>&lt; Back</Link>
+      </p>
       <h1>{detailPost?.data.attributes.Name}</h1>
       <p>{detailPost?.data.attributes.Description[0].children[0].text}</p>
     </div>

@@ -1,0 +1,30 @@
+.blog-numbered-pagination {
+    text-align: center;
+}
+
+.blog-buttons-pagination {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.blog-button-icon {
+    color: #fff;
+    cursor: pointer;
+    background-color: #00005cde;
+    border: 1px solid #00005cde;
+    border-radius: 4px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-active-button {
+    background-color: #00005c;
+    color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
