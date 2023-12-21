@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import BlogPagination from '../Pagination';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -10,12 +11,13 @@ function BlogCard() {
 
   const searchParams = new URLSearchParams(window.location.search);
   const initialPageIndex = parseInt(searchParams.get('page')) || 1;
+  console.log(initialPageIndex)
 
   const [pageIndex, setPageIndex] = useState(initialPageIndex);
 
   useEffect(() => {
     void getAllRestaurants();
-    // eslint-disable-next-line no-use-before-define
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex]);
 
   const navigate = useNavigate()
@@ -34,11 +36,13 @@ function BlogCard() {
     navigate(`?page=${pageIndex + 1}`)
   };
 
+  const pageCount = restaurants?.meta?.pagination.pageCount
+
   const getAllRestaurants = async () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${BASE_URL}/restaurants?pagination[page]=${pageIndex}&pagination[pageSize]=9`,
+        `${BASE_URL}/restaurants?pagination[page]=${pageIndex}&pagination[pageSize]=12`,
         {
           method: 'GET',
           headers: {
@@ -96,18 +100,13 @@ function BlogCard() {
           );
         })}
       </div>
-      <div className='blog-pagination'>
-        <button disabled={pageIndex === 1} onClick={prevPage}>
-          &lt; Previous
-        </button>
-        {`${pageIndex} / ${restaurants?.meta?.pagination.pageCount}`}
-        <button
-          disabled={pageIndex === restaurants?.meta?.pagination.pageCount}
-          onClick={nextPage}
-        >
-          Next &gt;
-        </button>
-      </div>
+      <BlogPagination 
+        pageIndex={pageIndex}
+        prevPage={prevPage}
+        nextPage={nextPage}
+        pageCount={pageCount}
+      />
+      
     </>
   );
 }
