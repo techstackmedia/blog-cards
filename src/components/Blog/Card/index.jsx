@@ -35,7 +35,13 @@ function BlogCard() {
     navigate(`?page=${pageIndex + 1}`)
   };
 
+  const currentPage = (pageIndex) => {
+    setPageIndex(pageIndex);
+    navigate(`?page=${pageIndex}`);
+  };
+
   const pageCount = restaurants?.meta?.pagination.pageCount
+  const total = restaurants?.meta?.pagination.total
 
   const getAllRestaurants = async () => {
     setIsLoading(true);
@@ -108,6 +114,8 @@ function BlogCard() {
         prevPage={prevPage}
         nextPage={nextPage}
         pageCount={pageCount}
+        total={total}
+        currentPage={currentPage}
       />
       
     </>
