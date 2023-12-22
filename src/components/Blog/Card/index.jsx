@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import BlogPagination from '../Pagination';
+import BlogPagination from '../Pagination/PrevNext';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -11,7 +11,6 @@ function BlogCard() {
 
   const searchParams = new URLSearchParams(window.location.search);
   const initialPageIndex = parseInt(searchParams.get('page')) || 1;
-  console.log(initialPageIndex)
 
   const [pageIndex, setPageIndex] = useState(initialPageIndex);
 
@@ -68,6 +67,10 @@ function BlogCard() {
 
   if (isLoading) {
     return <p>Loading...</p>;
+  }
+
+  if (!restaurants?.data || restaurants?.data.length === 0) {
+    return <p>No blog posts found</p>
   }
 
   return (
