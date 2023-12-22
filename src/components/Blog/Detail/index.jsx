@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Spinner from '../../shared/Spinner'
+import './styles.css'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -39,11 +41,11 @@ const BlogDetail = () => {
   }
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <Spinner />;
   }
 
   return (
-    <div>
+    <div className='blog-detail'>
       <p>
         <Link to='/'>&lt; Back</Link>
       </p>
