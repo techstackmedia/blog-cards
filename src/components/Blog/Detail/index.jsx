@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import './styles.css';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 

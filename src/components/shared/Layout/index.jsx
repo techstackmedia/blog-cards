@@ -1,9 +1,10 @@
 import Footer from "../../Footer";
 import Navbar from "../../Navbar";
+import './styles.css'
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="layout">
       <Navbar />
       <main>{children}</main>
       <Footer />
