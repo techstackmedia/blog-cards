@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import BlogPagination from '../Pagination/Numbered';
+import BlogPagination from '../Pagination/PrevNext';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -16,32 +16,26 @@ function BlogCard() {
 
   useEffect(() => {
     void getAllRestaurants();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const prevPage = () => {
     setPageIndex((prev) => {
       return prev - 1;
     });
-    navigate(`?page=${pageIndex - 1}`)
+    navigate(`?page=${pageIndex - 1}`);
   };
 
   const nextPage = () => {
     setPageIndex((prev) => {
       return prev + 1;
     });
-    navigate(`?page=${pageIndex + 1}`)
+    navigate(`?page=${pageIndex + 1}`);
   };
 
-  const currentPage = (pageIndex) => {
-    setPageIndex(pageIndex);
-    navigate(`?page=${pageIndex}`);
-  };
-
-  const pageCount = restaurants?.meta?.pagination.pageCount
-  const total = restaurants?.meta?.pagination.total
+  const pageCount = restaurants?.meta?.pagination.pageCount;
 
   const getAllRestaurants = async () => {
     setIsLoading(true);
@@ -76,7 +70,7 @@ function BlogCard() {
   }
 
   if (!restaurants?.data || restaurants?.data.length === 0) {
-    return <p>No blog posts found.</p>
+    return <p>No blog posts found</p>;
   }
 
   return (
@@ -109,15 +103,12 @@ function BlogCard() {
           );
         })}
       </div>
-      <BlogPagination 
+      <BlogPagination
         pageIndex={pageIndex}
         prevPage={prevPage}
         nextPage={nextPage}
         pageCount={pageCount}
-        total={total}
-        currentPage={currentPage}
       />
-      
     </>
   );
 }
