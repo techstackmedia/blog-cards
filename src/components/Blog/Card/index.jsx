@@ -105,7 +105,7 @@ function BlogCard() {
             const truncatedWords =
               textArray.length > 30
                 ? `${textArray.splice(0, 30).join(' ')}...`
-                : `${textArray.join(' ')}...`;
+                : `${textArray.join(' ')}`;
 
             const content = textArray.join(' ');
 

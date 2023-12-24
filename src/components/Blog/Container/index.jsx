@@ -15,7 +15,6 @@ const BlogContainer = ({
   cardDescription,
 }) => {
   const [readingTime, setReadingTime] = useState(0);
-  // console.log(truncatedWords)
 
   useEffect(() => {
     const wordsPerMinute = 225;
