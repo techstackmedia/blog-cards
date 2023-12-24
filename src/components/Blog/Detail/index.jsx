@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Spinner from '../../shared/Spinner'
-import './styles.css'
+import Spinner from '../../shared/Spinner';
+import './styles.css';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -44,13 +44,39 @@ const BlogDetail = () => {
     return <Spinner />;
   }
 
+  const name = detailPost?.data.attributes.Name;
+  const description = detailPost?.data.attributes.Description;
+
+  const renderHTML = () => {
+    let html = `<h2>${name}</h2>`;
+
+    if (description && description.length > 0) {
+      description.forEach((paragraph) => {
+        if (paragraph.children && paragraph.children.length > 0) {
+          const text = paragraph.children
+            .map((child) => {
+              if (child.bold) {
+                return `<strong>${child.text}</strong>`;
+              } else {
+                return child.text;
+              }
+            })
+            .join(' ');
+
+          html += `<p>${text}</p>`;
+        }
+      });
+    }
+
+    return { __html: html };
+  };
+
   return (
     <div className='blog-detail'>
       <p>
         <Link to='/'>&lt; Back</Link>
       </p>
-      <h1>{detailPost?.data.attributes.Name}</h1>
-      <p>{detailPost?.data.attributes.Description[0].children[0].text}</p>
+      <div dangerouslySetInnerHTML={renderHTML()} />
     </div>
   );
 };
