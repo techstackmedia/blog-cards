@@ -25,6 +25,6 @@
 .blog-prevNext-pagination button:disabled {
   background-color: #ccc;
   color: #333;
-  border-color: #333;
+  border-color: #ccc;
   cursor: not-allowed;
 }

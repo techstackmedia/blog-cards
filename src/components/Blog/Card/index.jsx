@@ -37,6 +37,10 @@ function BlogCard() {
     navigate(`?page=${pageIndex + 1}`);
   };
 
+  const handleArticleNav = (link) => {
+    navigate(link);
+  };
+
   const pageCount = restaurants?.meta?.pagination.pageCount;
 
   const getAllRestaurants = async () => {
@@ -68,7 +72,7 @@ function BlogCard() {
   }
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!restaurants?.data || restaurants?.data.length === 0) {
@@ -85,24 +89,39 @@ function BlogCard() {
             const cardDescription =
               item.attributes.Description[0].children[0].text;
             const words = cardDescription.split(' ');
+            const dateString = item.attributes.publishedAt;
+            const dateObject = new Date(dateString);
+            const formattedDate = dateObject.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            });
 
             return (
               <div key={item.id} className='blog-card'>
-                <div className='blog-card-image'>
+                <div
+                  className='blog-card-image'
+                  onClick={() => handleArticleNav(`/${item.id}`)}
+                >
                   <p className='blog-card-title'>{cardTitle}</p>
                 </div>
                 <div className='blog-card-body'>
                   <div className='blog-card-content'>
-                    <h2 className='blog-card-title'>{cardTitle}</h2>
+                    <h2 className='blog-card-title'>
+                      <Link to={`/${item.id}`}>{cardTitle}</Link>
+                    </h2>
                     <p className='blog-card-description'>
-                      {words.length > 20
-                        ? `${words.splice(0, 20).join(' ')}...`
-                        : cardDescription}
+                      <Link to={`/${item.id}`}>
+                        {words.length > 30
+                          ? `${words.splice(0, 30).join(' ')}...`
+                          : cardDescription}
+                      </Link>
                     </p>
+                    <p className='blog-card-published-date'>{formattedDate}</p>
                   </div>
-                  <Link to={`/${item.id}`} className='blog-card-link'>
+                  {/* <Link to={`/${item.id}`} className='blog-card-link'>
                     Read More
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             );
