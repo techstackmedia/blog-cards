@@ -87,9 +87,6 @@ function BlogCard() {
         <div className='blog-container'>
           {restaurants?.data.map((item) => {
             const cardTitle = item.attributes.Name;
-            const cardDescription =
-              item.attributes.Description[0].children[0].text;
-            const words = cardDescription.split(' ');
             const dateString = item.attributes.publishedAt;
             const dateObject = new Date(dateString);
             const formattedDate = dateObject.toLocaleDateString('en-US', {
@@ -97,10 +94,20 @@ function BlogCard() {
               month: 'long',
               day: 'numeric',
             });
+            const descriptions = item.attributes.Description;
+
+            const textArray = descriptions
+              .map((paragraph) => {
+                return paragraph.children.map((child) => child.text);
+              })
+              .join(' ')
+              .split(' ');
             const truncatedWords =
-              words.length > 30
-                ? `${words.splice(0, 30).join(' ')}...`
-                : cardDescription;
+              textArray.length > 30
+                ? `${textArray.splice(0, 30).join(' ')}...`
+                : `${textArray.join(' ')}...`;
+
+            const content = textArray.join(' ');
 
             return (
               <BlogContainer
@@ -108,7 +115,7 @@ function BlogCard() {
                 handleArticleNav={handleArticleNav}
                 item={item}
                 cardTitle={cardTitle}
-                cardDescription={cardDescription}
+                cardDescription={content}
                 formattedDate={formattedDate}
                 truncatedWords={truncatedWords}
               />
