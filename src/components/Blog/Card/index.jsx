@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BlogPagination from '../Pagination/PrevNext';
 import './styles.css';
 import Spinner from '../../shared/Spinner';
+import BlogContainer from '../Container';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -96,34 +97,21 @@ function BlogCard() {
               month: 'long',
               day: 'numeric',
             });
+            const truncatedWords =
+              words.length > 30
+                ? `${words.splice(0, 30).join(' ')}...`
+                : cardDescription;
 
             return (
-              <div key={item.id} className='blog-card'>
-                <div
-                  className='blog-card-image'
-                  onClick={() => handleArticleNav(`/${item.id}`)}
-                >
-                  <p className='blog-card-title'>{cardTitle}</p>
-                </div>
-                <div className='blog-card-body'>
-                  <div className='blog-card-content'>
-                    <h2 className='blog-card-title'>
-                      <Link to={`/${item.id}`}>{cardTitle}</Link>
-                    </h2>
-                    <p className='blog-card-description'>
-                      <Link to={`/${item.id}`}>
-                        {words.length > 30
-                          ? `${words.splice(0, 30).join(' ')}...`
-                          : cardDescription}
-                      </Link>
-                    </p>
-                    <p className='blog-card-published-date'>{formattedDate}</p>
-                  </div>
-                  {/* <Link to={`/${item.id}`} className='blog-card-link'>
-                    Read More
-                  </Link> */}
-                </div>
-              </div>
+              <BlogContainer
+                key={item.id}
+                handleArticleNav={handleArticleNav}
+                item={item}
+                cardTitle={cardTitle}
+                cardDescription={cardDescription}
+                formattedDate={formattedDate}
+                truncatedWords={truncatedWords}
+              />
             );
           })}
         </div>
