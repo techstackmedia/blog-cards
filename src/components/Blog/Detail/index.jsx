@@ -57,6 +57,8 @@ const BlogDetail = () => {
             .map((child) => {
               if (child.bold) {
                 return `<strong>${child.text}</strong>`;
+              } else if (child.url) {
+                return `<a href=${child.url} target="_blank" rel="noopener noreferrer">${child.children[0].text}</a>`;
               } else {
                 return child.text;
               }
