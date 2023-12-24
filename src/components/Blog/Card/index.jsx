@@ -24,11 +24,19 @@ function BlogCard() {
 
   const navigate = useNavigate();
 
+  const smoothScroll = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }
+  
   const prevPage = () => {
     setPageIndex((prev) => {
       return prev - 1;
     });
     navigate(`?page=${pageIndex - 1}`);
+    smoothScroll()
   };
 
   const nextPage = () => {
@@ -36,10 +44,12 @@ function BlogCard() {
       return prev + 1;
     });
     navigate(`?page=${pageIndex + 1}`);
+    smoothScroll()
   };
 
   const handleArticleNav = (link) => {
     navigate(link);
+    smoothScroll()
   };
 
   const pageCount = restaurants?.meta?.pagination.pageCount;

@@ -1,3 +1,8 @@
+body,
+html {
+  font-family: 'Barlow', sans-serif;
+}
+
 nav {
   background-color: #00005cde;
   padding: 15px 0;
