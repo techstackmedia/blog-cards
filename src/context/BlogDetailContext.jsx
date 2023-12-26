@@ -3,7 +3,12 @@ import Spinner from '../components/shared/Spinner';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const BlogDetailContext = createContext();
+const defaultValue = {
+  renderHTML: () => ({ __html: '' }),
+  getRestaurantsPost: () => {},
+};
+
+const BlogDetailContext = createContext(defaultValue);
 const BlogDetailProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);

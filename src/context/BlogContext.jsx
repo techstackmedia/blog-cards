@@ -4,7 +4,17 @@ import Spinner from '../components/shared/Spinner';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const BlogContext = createContext();
+const defaultValue = {
+  prevPage: () => {},
+  nextPage: () => {},
+  pageCount: 1,
+  handleArticleNav: () => {},
+  restaurants: null,
+  pageIndex: 1,
+};
+
+const BlogContext = createContext(defaultValue);
+
 const BlogProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
