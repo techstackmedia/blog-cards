@@ -1,19 +1,10 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Spinner from '../components/shared/Spinner';
+import Spinner from '../../components/shared/Spinner';
+import { defaultBlogValue } from '../defaultValues';
+import { BASE_URL } from '../../constants/BASE_URL';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
-const defaultValue = {
-  prevPage: () => {},
-  nextPage: () => {},
-  pageCount: 1,
-  handleArticleNav: () => {},
-  restaurants: null,
-  pageIndex: 1,
-};
-
-const BlogContext = createContext(defaultValue);
+const BlogContext = createContext(defaultBlogValue);
 
 const BlogProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState(null);
@@ -113,5 +104,4 @@ const BlogProvider = ({ children }) => {
   );
 };
 
-export { BlogProvider };
-export default BlogContext;
+export { BlogProvider, BlogContext };

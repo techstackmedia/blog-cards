@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import {
   calculateReadingTime,
   countWords,
-} from '../../../utils/ContentReadingTime';
+} from '../../../utils/Content';
 
 const BlogContainer = ({
   item,

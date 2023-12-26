@@ -2,7 +2,9 @@ import BlogPagination from '../Pagination/PrevNext';
 import './styles.css';
 import BlogContainer from '../Container';
 import { useContext } from 'react';
-import BlogContext from '../../../context/BlogContext';
+import { contentTruncate } from '../../../utils/Content';
+import { dateFormatter } from '../../../utils/Formatter';
+import { BlogContext } from '../../../context/BlogContext';
 
 function BlogCard() {
   const {
@@ -22,26 +24,10 @@ function BlogCard() {
           {restaurants?.data.map((item) => {
             const cardTitle = item.attributes.Name;
             const dateString = item.attributes.publishedAt;
-            const dateObject = new Date(dateString);
-            const formattedDate = dateObject.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            });
+            const formattedDate = dateFormatter(dateString);
+
             const descriptions = item.attributes.Description;
-
-            const textArray = descriptions
-              .map((paragraph) => {
-                return paragraph.children.map((child) => child.text);
-              })
-              .join(' ')
-              .split(' ');
-            const truncatedWords =
-              textArray.length > 30
-                ? `${textArray.splice(0, 30).join(' ')}...`
-                : `${textArray.join(' ')}`;
-
-            const content = textArray.join(' ');
+            const { truncatedWords, content } = contentTruncate(descriptions);
 
             return (
               <BlogContainer

@@ -1,14 +1,9 @@
 import { createContext, useState } from 'react';
-import Spinner from '../components/shared/Spinner';
+import { defaultBlogDetailValue } from '../defaultValues';
+import Spinner from '../../components/shared/Spinner';
+import { BASE_URL } from '../../constants/BASE_URL';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
-const defaultValue = {
-  renderHTML: () => ({ __html: '' }),
-  getRestaurantsPost: () => {},
-};
-
-const BlogDetailContext = createContext(defaultValue);
+const BlogDetailContext = createContext(defaultBlogDetailValue);
 const BlogDetailProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -78,5 +73,4 @@ const BlogDetailProvider = ({ children }) => {
   );
 };
 
-export { BlogDetailProvider };
-export default BlogDetailContext;
+export { BlogDetailProvider, BlogDetailContext };

@@ -1,11 +1,10 @@
 import { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './styles.css';
-import BlogDetailContext from '../../../context/BlogDetailContext';
+import { BlogDetailContext } from '../../../context/BlogDetailContext';
 
 const BlogDetail = () => {
   const { renderHTML, getRestaurantsPost } = useContext(BlogDetailContext);
-  console.log(renderHTML());
 
   const { id } = useParams();
   useEffect(() => {
