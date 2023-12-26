@@ -7,24 +7,24 @@
 }
 
 .blog-prevNext-pagination button {
-  background-color: #00005cde;
+  background-color: var(--background-color);
   padding: 10px 20px;
-  color: #fff;
-  border: 1px solid #00005cde;
+  color: var(--color-white);
+  border: 1px solid var(--background-color);
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
-    color 0.3s ease-in-out;
+  var(--transition-color);
 }
 
 .blog-prevNext-pagination button:hover {
-  background-color: #00005c;
-  border-color: #00005c;
+  background-color: var(--bg-color);
+  border-color: var(--bg-color);
 }
 
 .blog-prevNext-pagination button:disabled {
   background-color: #ccc;
-  color: #333;
+  color: var(--main-text-color);
   border-color: #ccc;
   cursor: not-allowed;
 }
