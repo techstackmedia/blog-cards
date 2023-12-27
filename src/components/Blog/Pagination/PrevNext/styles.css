@@ -7,14 +7,7 @@
 }
 
 .blog-prevNext-pagination button {
-  background-color: var(--background-color);
   padding: 10px 20px;
-  color: var(--color-white);
-  border: 1px solid var(--background-color);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
-  var(--transition-color);
 }
 
 .blog-prevNext-pagination button:hover {
@@ -26,5 +19,4 @@
   background-color: #ccc;
   color: var(--main-text-color);
   border-color: #ccc;
-  cursor: not-allowed;
 }

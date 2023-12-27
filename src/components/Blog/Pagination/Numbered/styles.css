@@ -12,7 +12,6 @@
 
 .blog-button-icon {
   color: var(--color-white);
-  cursor: pointer;
   background-color: var(--background-color);
   border: 1px solid var(--background-color);
   border-radius: 4px;

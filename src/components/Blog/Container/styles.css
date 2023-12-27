@@ -5,7 +5,6 @@
   margin: 20px;
   box-shadow: 0 4px 8px var(--box-shadow-color);
   transition: transform 0.3s ease-in-out;
-  height: 370px;
 }
 
 .blog-card:hover {
