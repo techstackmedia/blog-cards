@@ -4,7 +4,7 @@
   --background-color: #00005cde;
   --color-white: #fff;
   --bg-color: #00005c;
-  --transition-color: color 0.3s ease-in-out
+  --transition-color: color 0.3s ease-in-out;
 }
 
 body,
@@ -50,7 +50,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
-  var(--transition-color);
+    var(--transition-color);
 }
 
 button:hover {
@@ -79,6 +79,9 @@ footer {
   .blog-card {
     width: 100%;
   }
+  .blog-detail {
+    width: 90%;
+  }
 }
 
 @media (min-width: 701px) {
@@ -96,7 +99,7 @@ footer {
 @media (min-width: 0px) {
   .blog-card {
     height: 480px;
-    width: 95%
+    width: 95%;
   }
 }
 
@@ -125,9 +128,33 @@ footer {
   }
 }
 
+@media (min-width: 991px) {
+  .blog-detail {
+    width: 80%;
+  }
+}
+
 @media (min-width: 1000px) {
   .blog-card {
     height: 390px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .blog-detail {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .blog-detail {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .blog-detail {
+    width: 53%;
   }
 }
 
