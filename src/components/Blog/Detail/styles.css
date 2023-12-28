@@ -27,9 +27,10 @@
 .blog-content-info {
   position: relative;
   top: 4px;
-  font-size: 14px;
+  color: #777;
 }
 
 .blog-content-description {
   line-height: 1.8;
+  font-size: 18px;
 }
