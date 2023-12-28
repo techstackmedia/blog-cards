@@ -2,3 +2,33 @@
   margin-top: 50px;
   margin-inline: auto;
 }
+
+.blog-cover {
+  position: relative;
+}
+
+.blog-cover-text {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  margin: 0;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+}
+
+.blog-cover-image {
+  background-color: #00005cde;
+  border-radius: 10px;
+}
+
+.blog-content-info {
+  position: relative;
+  top: 4px;
+  font-size: 14px;
+}
+
+.blog-content-description {
+  line-height: 1.8;
+}

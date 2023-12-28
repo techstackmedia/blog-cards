@@ -52,7 +52,7 @@ const BlogDetailProvider = ({ children }) => {
               if (child.bold) {
                 return `<strong>${child.text}</strong>`;
               } else if (child.type === 'link') {
-                return `<a href=${child.url}>${child.children[0].text}</a>`;
+                return `<a href=${child.url} target="_blank" rel="noopener noreferrer">${child.children[0].text}</a>`;
               } else {
                 return child.text;
               }
