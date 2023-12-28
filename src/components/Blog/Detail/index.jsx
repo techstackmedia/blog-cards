@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { BlogDetailContext } from '../../../context/BlogDetailContext';
 import { BlogContext } from '../../../context/BlogContext';
@@ -13,12 +13,13 @@ const BlogDetail = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    void getRestaurantsPost(id);
+    getRestaurantsPost(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const content = renderHTML().__html;
-  const wordsPerMinute = 225;  
+  const renderedHTML = renderHTML();
+  const content = renderedHTML.__html;
+  const wordsPerMinute = 225;
 
   useEffect(() => {
     if (content) {
@@ -28,11 +29,40 @@ const BlogDetail = () => {
     }
   }, [content, renderHTML]);
 
-  const restaurant = restaurants?.data.find((item) => {
-    return item.id === +id;
-  });
+  const findRestaurantById = (restaurantId) =>
+    restaurants?.data.find((item) => item.id === +restaurantId);
+
+  const restaurant = findRestaurantById(id);
+  const restaurantID = restaurant?.id;
+
+  const restaurantIndex = restaurants?.data.findIndex(
+    (item) => item.id === +id
+  );
+
+  const getNextPage = (index) =>
+    index === undefined || !restaurants?.data.length
+      ? null
+      : `/${restaurants?.data[index + 1]?.id}`;
+
+  const getPrevPage = (index) =>
+    index === undefined || !restaurants?.data.length
+      ? null
+      : `/${restaurants?.data[index - 1]?.id}`;
+
+  const nextPage = getNextPage(restaurantIndex);
+  const prevPage = getPrevPage(restaurantIndex);
 
   const publishedDate = restaurant?.attributes?.publishedAt;
+
+  const getNextRestaurant = findRestaurantById(restaurantID + 1);
+  const nextTopic = getNextRestaurant?.attributes?.Name;
+
+  const getPrevRestaurant = findRestaurantById(restaurantID - 1);
+  const prevTopic = getPrevRestaurant?.attributes?.Name;
+  const unknownURL = '/undefined';
+  const blogPosts = 'Blog Posts';
+  const blogPage = `/?page=${pageIndex}`;
+  const blog = 'Blog';
 
   if (!content) {
     return null;
@@ -41,7 +71,7 @@ const BlogDetail = () => {
   return (
     <div className='blog-detail'>
       <p>
-        <Link to={`/?page=${pageIndex}`}>&lt; Blog</Link>
+        <Link to={blogPage}>&lt; {blog}</Link>
       </p>
       {!publishedDate ? null : (
         <>
@@ -65,8 +95,30 @@ const BlogDetail = () => {
       )}
       <div
         className='blog-content-description'
-        dangerouslySetInnerHTML={renderHTML()}
+        dangerouslySetInnerHTML={renderedHTML}
       />
+      <div className='blog-detail-links'>
+        <div className='blog-detail-link'>
+          <span>&lt;</span>
+          <div>
+            <Link
+              title={prevPage === unknownURL ? blogPosts : prevTopic}
+              to={prevPage === unknownURL ? blogPage : prevPage}
+            >
+              {prevPage === unknownURL ? blog : 'Previous'}
+            </Link>
+          </div>
+        </div>
+
+        <div className='blog-detail-link'>
+          <Link
+            title={nextPage === unknownURL ? blogPosts : nextTopic}
+            to={nextPage === unknownURL ? blogPage : nextPage}
+          >
+            {nextPage === unknownURL ? blog : 'Next'} &gt;
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

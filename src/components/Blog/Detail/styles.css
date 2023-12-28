@@ -34,3 +34,13 @@
   line-height: 1.8;
   font-size: 18px;
 }
+
+.blog-detail-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog-detail-link {
+  display: flex;
+  gap: 4px;
+}
