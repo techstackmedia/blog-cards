@@ -4,13 +4,43 @@ import { BlogDetailContext } from '../../../context/BlogDetailContext';
 import { BlogContext } from '../../../context/BlogContext';
 import { dateFormatter } from '../../../utils/Formatter';
 import { calculateReadingTime, countWords } from '../../../utils/Content';
+import Sidebar from '../Sidebar';
 import './styles.css';
 
 const BlogDetail = () => {
   const [readingTime, setReadingTime] = useState(0);
   const { renderHTML, getRestaurantsPost } = useContext(BlogDetailContext);
   const { restaurants, pageIndex } = useContext(BlogContext);
+  const [activeHeading, setActiveHeading] = useState(null);
+  const [headings, setHeadings] = useState([]);
   const { id } = useParams();
+
+  const handleScroll = () => {
+    const headings = document.querySelectorAll('h3');
+
+    for (let i = headings.length - 1; i >= 0; i--) {
+      const heading = headings[i];
+      const rect = heading.getBoundingClientRect();
+
+      if (rect.top <= 100) {
+        setActiveHeading(heading.id);
+        break;
+      }
+    }
+  };
+
+  useEffect(() => {
+    const headings = document.querySelectorAll('h3');
+    const headingTexts = Array.from(headings).map(
+      (heading) => heading.textContent
+    );
+    setHeadings(headingTexts);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [renderHTML]);
 
   useEffect(() => {
     getRestaurantsPost(id);
@@ -53,6 +83,9 @@ const BlogDetail = () => {
   const prevPage = getPrevPage(restaurantIndex);
 
   const publishedDate = restaurant?.attributes?.publishedAt;
+  const updatedDate = restaurant?.attributes?.updatedAt;
+  const publish = publishedDate?.split('T')[0];
+  const update = updatedDate?.split('T')[0];
 
   const getNextRestaurant = findRestaurantById(restaurantID + 1);
   const nextTopic = getNextRestaurant?.attributes?.Name;
@@ -69,54 +102,71 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className='blog-detail'>
-      <p>
-        <Link to={blogPage}>&lt; {blog}</Link>
-      </p>
-      {!publishedDate ? null : (
-        <>
-          <div className='blog-cover'>
-            <p className='blog-cover-text'>{restaurant?.attributes?.Name}</p>
-            <img
-              className='blog-cover-image'
-              src='http://www.pngmart.com/files/13/Pattern-Transparent-Background.png'
-              alt={`blog cover with text, "${restaurant?.attributes.Name}"`}
-              width='100%'
-              height={250}
-            />
-          </div>
-          <span className='blog-content-info'>
-            <span>
-              Posted on {dateFormatter(publishedDate)} &mdash; {readingTime}{' '}
-              {readingTime === 1 ? 'minute' : 'minutes'} read
+    <div className='blog-detail-page'>
+      <Sidebar headings={headings} activeHeading={activeHeading} />
+      <div className='blog-detail'>
+        <div>
+          <Link className='blog-detail-link' to={blogPage}>
+            {' '}
+            <span className='arrow'>&lt;</span>
+            {blog}
+          </Link>
+        </div>
+        {!publishedDate ? null : (
+          <>
+            <div className='blog-cover'>
+              <p className='blog-cover-text'>{restaurant?.attributes?.Name}</p>
+              <img
+                className='blog-cover-image'
+                src='http://www.pngmart.com/files/13/Pattern-Transparent-Background.png'
+                alt={`blog cover with text, "${restaurant?.attributes.Name}"`}
+                width='100%'
+                height={250}
+              />
+            </div>
+            <span className='blog-content-info'>
+              <span>
+                Posted on {dateFormatter(publishedDate)}
+                {update === publish ? null : (
+                  <span>
+                    <span className='dot'></span>Updated on{' '}
+                    {dateFormatter(update)}
+                  </span>
+                )}{' '}
+                &mdash; {readingTime} {readingTime === 1 ? 'minute' : 'minutes'}{' '}
+                read
+              </span>
             </span>
-          </span>
-        </>
-      )}
-      <div
-        className='blog-content-description'
-        dangerouslySetInnerHTML={renderedHTML}
-      />
-      <div className='blog-detail-links'>
-        <div className='blog-detail-link'>
-          <span>&lt;</span>
+          </>
+        )}
+        <div
+          className='blog-content-description'
+          dangerouslySetInnerHTML={renderedHTML}
+        />
+        <div className='blog-detail-links'>
+          <div>
+            <div>
+              <Link
+                title={prevPage === unknownURL ? blogPosts : prevTopic}
+                to={prevPage === unknownURL ? blogPage : prevPage}
+                className='blog-detail-link'
+              >
+                <span className='arrow'>&lt;</span>
+                {prevPage === unknownURL ? blog : 'Previous'}
+              </Link>
+            </div>
+          </div>
+
           <div>
             <Link
-              title={prevPage === unknownURL ? blogPosts : prevTopic}
-              to={prevPage === unknownURL ? blogPage : prevPage}
+              title={nextPage === unknownURL ? blogPosts : nextTopic}
+              to={nextPage === unknownURL ? blogPage : nextPage}
+              className='blog-detail-link'
             >
-              {prevPage === unknownURL ? blog : 'Previous'}
+              {nextPage === unknownURL ? blog : 'Next'}
+              <span className='arrow'>&gt;</span>
             </Link>
           </div>
-        </div>
-
-        <div className='blog-detail-link'>
-          <Link
-            title={nextPage === unknownURL ? blogPosts : nextTopic}
-            to={nextPage === unknownURL ? blogPage : nextPage}
-          >
-            {nextPage === unknownURL ? blog : 'Next'} &gt;
-          </Link>
         </div>
       </div>
     </div>

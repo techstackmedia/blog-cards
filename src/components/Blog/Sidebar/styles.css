@@ -1,0 +1,39 @@
+.blog-detail-page {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  position: fixed;
+  top: 50px;
+  left: 20px;
+}
+
+.sidebar h4 {
+  padding: 0 10px;
+  margin: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 10px;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: var(--color-black);
+  font-size: 14px;
+}
+
+.sidebar a:hover {
+  color: var(--color-link);
+}
+
+.sidebar .active {
+  font-weight: bold;
+  color: var(--color-link);
+}

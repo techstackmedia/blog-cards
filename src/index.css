@@ -3,6 +3,8 @@
   --box-shadow-color: rgba(0, 0, 0, 0.1);
   --background-color: #00005cde;
   --color-white: #fff;
+  --color-black: #000;
+  --color-link: #0000ee;
   --bg-color: #00005c;
   --transition-color: color 0.3s ease-in-out;
 }
