@@ -13,13 +13,14 @@
   transform: translate(-50%, -50%);
   position: absolute;
   margin: 0;
-  color: #fff;
+  color: var(--color-white);
   font-size: 30px;
   text-align: center;
+  width: 100%;
 }
 
 .blog-cover-image {
-  background-color: #00005cde;
+  background-color: var(--bg-color);
   border-radius: 10px;
 }
 

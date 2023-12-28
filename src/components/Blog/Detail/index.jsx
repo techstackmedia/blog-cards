@@ -17,16 +17,16 @@ const BlogDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  useEffect(() => {
-    const wordsPerMinute = 225;
-    const content = renderHTML().__html;
+  const content = renderHTML().__html;
+  const wordsPerMinute = 225;
 
+  useEffect(() => {
     if (content) {
-      const wordCount = countWords(renderHTML().__html);
+      const wordCount = countWords(content);
       const estimatedTime = calculateReadingTime(wordCount, wordsPerMinute);
       setReadingTime(estimatedTime);
     }
-  }, [renderHTML]);
+  }, [content, renderHTML]);
 
   const restaurant = restaurants?.data.find((item) => {
     return item.id === +id;
@@ -34,7 +34,7 @@ const BlogDetail = () => {
 
   const publishedDate = restaurant?.attributes?.publishedAt;
 
-  if (!renderHTML().html === null) {
+  if (!content) {
     return null;
   }
 
@@ -48,7 +48,7 @@ const BlogDetail = () => {
         <img
           className='blog-cover-image'
           src='http://www.pngmart.com/files/13/Pattern-Transparent-Background.png'
-          alt={`blog cover with text, '${restaurant?.attributes.Name}'`}
+          alt={`blog cover with text, "${restaurant?.attributes.Name}"`}
           width='100%'
           height={250}
         />
