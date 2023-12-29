@@ -7,7 +7,7 @@ import { BASE_URL } from '../../constants/BASE_URL';
 const BlogContext = createContext(defaultBlogValue);
 
 const BlogProvider = ({ children }) => {
-  const [restaurants, setRestaurants] = useState(null);
+  const [restaurants, setRestaurants] = useState([null]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 

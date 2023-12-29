@@ -43,8 +43,8 @@ const BlogDetailProvider = ({ children }) => {
 
   const renderHTML = () => {
     let html = name === undefined ? null : `<h2>${name}</h2>`;
-
-    if (description && description.length > 0) {
+  
+    if (Array.isArray(description) && description.length > 0) {
       description.forEach((paragraph) => {
         if (paragraph.children && paragraph.children.length > 0) {
           const text = paragraph.children
@@ -58,14 +58,15 @@ const BlogDetailProvider = ({ children }) => {
               }
             })
             .join(' ');
-
+  
           html += `<p>${text}</p>`;
         }
       });
     }
-
+  
     return { __html: html };
   };
+  
   return (
     <BlogDetailContext.Provider value={{ renderHTML, getRestaurantsPost }}>
       {children}

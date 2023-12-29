@@ -1,6 +1,6 @@
 const countWords = (content) => {
-    const words = content.split(/\s+/);
-    return words.length;
+    const words = content?.split(/\s+/);
+    return words?.length;
 };
 
 const calculateReadingTime = (wordCount, wordsPerMinute) => {
@@ -10,17 +10,17 @@ const calculateReadingTime = (wordCount, wordsPerMinute) => {
 
 const contentTruncate = (descriptions) => {
     const textArray = descriptions
-        .map((paragraph) => {
+        ?.map((paragraph) => {
             return paragraph.children.map((child) => child.text);
         })
         .join(' ')
         .split(' ');
     const truncatedWords =
-        textArray.length > 30
+        textArray?.length > 30
             ? `${textArray.splice(0, 30).join(' ')}...`
-            : `${textArray.join(' ')}`;
+            : `${textArray?.join(' ')}`;
 
-    const content = textArray.join(' ');
+    const content = textArray?.join(' ');
 
     return { truncatedWords, content };
 };
