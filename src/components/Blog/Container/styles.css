@@ -33,6 +33,7 @@
   font-size: 24px;
   color: var(--color-white);
   cursor: pointer;
+  text-align: center;
 }
 
 .blog-card-content {

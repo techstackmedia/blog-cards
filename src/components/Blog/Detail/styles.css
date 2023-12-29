@@ -1,6 +1,8 @@
 .blog-detail {
   margin-top: 50px;
   margin-inline: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .blog-cover {
