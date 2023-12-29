@@ -1,0 +1,37 @@
+.subscription-container {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-block: 50px;
+}
+
+.subscription-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.subscription-form {
+  font-weight: bold;
+  text-align: left;
+}
+
+.subscription-input {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.subscription-button {
+  padding: 10px;
+  background-color: var(--bg-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.subscription-button:hover {
+  background-color: var(--background-color);
+}

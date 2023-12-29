@@ -77,11 +77,17 @@ footer {
   left: 0;
 }
 
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
 @media (min-width: 0) {
   .blog-card {
     width: 100%;
   }
-  .blog-detail {
+  .blog-detail,
+  hr {
     width: 90%;
   }
 }
@@ -143,19 +149,22 @@ footer {
 }
 
 @media (min-width: 1200px) {
-  .blog-detail {
+  .blog-detail,
+  hr {
     width: 70%;
   }
 }
 
 @media (min-width: 1300px) {
-  .blog-detail {
+  .blog-detail,
+  hr {
     width: 60%;
   }
 }
 
 @media (min-width: 1400px) {
-  .blog-detail {
+  .blog-detail,
+  hr {
     width: 53%;
   }
 }
