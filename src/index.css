@@ -40,10 +40,6 @@ a {
   text-decoration: none;
 }
 
-main {
-  padding: 20px;
-}
-
 button {
   background-color: var(--background-color);
   padding: 10px 17px;

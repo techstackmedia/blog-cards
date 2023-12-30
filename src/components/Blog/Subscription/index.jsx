@@ -75,27 +75,19 @@ const Subscription = () => {
         the latest updates!
       </p>
 
-      <form className='subscription-form'>
-        {/* <label className='subscription-label' htmlFor='email'>
-          Email:
-        </label> */}
+      <form onSubmit={handleSubscribe} className='subscription-form'>
         <input
           className='subscription-input'
           type='email'
-          // id='email'
           placeholder='Your email'
           value={email}
           onChange={handleEmailChange}
           required
         />
 
-        {/* <label className='subscription-label' htmlFor='name'>
-          Name (optional):
-        </label> */}
         <input
           className='subscription-input'
           type='text'
-          // id='name'
           placeholder='Your name'
           value={name}
           onChange={handleNameChange}
@@ -103,8 +95,7 @@ const Subscription = () => {
 
         <button
           className='subscription-button'
-          type='button'
-          onClick={handleSubscribe}
+          type='submit'
         >
           Subscribe
         </button>
