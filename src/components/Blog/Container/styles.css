@@ -1,5 +1,5 @@
 .blog-card {
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-button-disable);
   border-radius: 8px;
   overflow: hidden;
   margin: 20px;
@@ -52,11 +52,11 @@
 }
 
 .blog-card-description {
-  color: #555;
+  color: var(--color-shade);
 }
 
 .blog-card-published-date {
-  color: #777;
+  color: var(--info-color);
 }
 
 .blog-card-link {

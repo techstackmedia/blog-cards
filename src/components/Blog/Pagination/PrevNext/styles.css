@@ -16,7 +16,7 @@
 }
 
 .blog-prevNext-pagination button:disabled {
-  background-color: #ccc;
+  background-color: var(--color-button-disable);
   color: var(--main-text-color);
-  border-color: #ccc;
+  border-color: var(--color-button-disable);
 }

@@ -28,7 +28,7 @@
 
 .blog-content-info {
   position: relative;
-  color: #777;
+  color: var(--info-color);
   display: flex;
   justify-content: center;
 }
@@ -57,10 +57,11 @@
   display: flex;
   gap: 4px;
   margin-bottom: 30px;
+  margin-top: 15px;
 }
 
 .blog-detail-link span {
-  color: #000;
+  color: var(--color-black);
 }
 
 .blog-detail a {

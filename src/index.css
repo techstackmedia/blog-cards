@@ -6,6 +6,11 @@
   --color-black: #000;
   --color-link: #0000ee;
   --bg-color: #00005c;
+  --info-color: #777;
+  --color-shade: #555;
+  --color-button-disable: #ccc;
+  --background-error: #e91c1c;
+  --background-success: #057205;
   --transition-color: color 0.3s ease-in-out;
 }
 
@@ -33,7 +38,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #ccc;
+  color: var(--color-button-disable);
 }
 
 a {
@@ -57,7 +62,7 @@ button:hover {
 }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: var(--color-button-disable);
   color: var(--main-text-color);
   border-color: var(--main-text-color);
 }
@@ -75,7 +80,7 @@ footer {
 
 hr {
   border: none;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid var(--color-button-disable);
 }
 
 @media (min-width: 0) {
