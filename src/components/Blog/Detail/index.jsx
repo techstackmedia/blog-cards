@@ -98,6 +98,8 @@ const BlogDetail = () => {
   const blogPage = `/?page=${pageIndex}`;
   const blog = 'Blog';
 
+  const storedEmail = localStorage.getItem('email');
+
   if (!content) {
     return null;
   }
@@ -174,8 +176,12 @@ const BlogDetail = () => {
           </div>
         </div>
       </div>
-      <hr />
-      <Subscription />
+      {!storedEmail ? (
+        <>
+          <hr />
+          <Subscription />
+        </>
+      ) : null}
     </>
   );
 };

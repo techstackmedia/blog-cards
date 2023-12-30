@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { contentTruncate } from '../../../utils/Content';
 import { dateFormatter } from '../../../utils/Formatter';
 import { BlogContext } from '../../../context/BlogContext';
+import Subscription from '../Subscription';
 
 function BlogCard() {
   const {
@@ -15,6 +16,8 @@ function BlogCard() {
     restaurants,
     pageIndex,
   } = useContext(BlogContext);
+
+  const storedEmail = localStorage.getItem('email');
 
   return (
     <>
@@ -49,6 +52,12 @@ function BlogCard() {
         nextPage={nextPage}
         pageCount={pageCount}
       />
+      {!storedEmail ? (
+        <>
+          <hr style={{ width: '90%' }} />
+          <Subscription />
+        </>
+      ) : null}
     </>
   );
 }

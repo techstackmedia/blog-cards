@@ -68,5 +68,5 @@
 }
 
 .blog-detail a:visited {
-  color: #0000ee;
+  color: var(--color-link);
 }
