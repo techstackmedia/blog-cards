@@ -13,6 +13,7 @@
   --background-error: #e91c1c;
   --background-success: #057205;
   --transition-color: color 0.3s ease-in-out;
+  --transparent-navbar: #1111119b;
 
   /* Dark Mode */
   --dark-main-text-color: #fff;
@@ -27,6 +28,7 @@
   --dark-color-button-disable: #444;
   --dark-background-error: #ff4d4d;
   --dark-background-success: #4caf50;
+  --dark-transparent-navbar: #f2f2f29b;
 }
 
 body,
@@ -37,7 +39,8 @@ html {
 }
 
 nav {
-  background-color: #f2f2f2b1;
+  background-color: var(--transparent-navbar);
+  border: 1px solid var(--color-button-disable);
   padding: 15px 0;
   text-align: center;
   position: fixed;
@@ -46,6 +49,8 @@ nav {
   z-index: 1000;
   display: flex;
   justify-content: space-between;
+  height: 40px;
+  align-items: center;
 }
 
 nav div:first-child {
@@ -104,8 +109,9 @@ button:disabled {
 }
 
 footer {
-  background-color: var(--background-color);
-  color: var(--color-white);
+  background-color: #fff;
+  color: var(--dark-background-color);
+  border-top: 1px solid var(--dark-info-color);
   text-align: center;
   padding: 15px 0;
   width: 100%;
@@ -125,9 +131,8 @@ html {
   color: var(--dark-main-text-color);
 }
 .nav {
-  background-color: #000000b5;
-  height: 40px;
-  align-items: center;
+  background-color: var(--dark-background-color);
+  border: 1px solid var(--main-text-color);
 }
 .nav a {
   color: var(--dark-color-white);
@@ -152,6 +157,7 @@ html {
 }
 .footer {
   background-color: var(--dark-background-color);
+  border: 1px solid var(--main-text-color);
   color: var(--dark-color-white);
 }
 .hr {
