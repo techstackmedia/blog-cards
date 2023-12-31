@@ -10,13 +10,17 @@ const ThemeProvider = ({ children }) => {
       const darkModeMediaQuery = window.matchMedia(
         '(prefers-color-scheme: dark)'
       );
-      setCurrentTheme(darkModeMediaQuery.matches ? 'dark' : 'light');
+      if (!localStorage.getItem('theme')) {
+        setCurrentTheme(darkModeMediaQuery.matches ? 'dark' : 'light');
+      }
     };
 
     detectOSTheme();
 
     const darkModeChangeListener = (event) => {
-      setCurrentTheme(event.matches ? 'dark' : 'light');
+      if (!localStorage.getItem('theme')) {
+        setCurrentTheme(event.matches ? 'dark' : 'light');
+      }
     };
 
     const darkModeMediaQuery = window.matchMedia(
