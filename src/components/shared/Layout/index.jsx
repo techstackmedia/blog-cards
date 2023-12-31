@@ -4,9 +4,9 @@ import Navbar from '../../Navbar';
 import './styles.css';
 
 const Layout = ({ children }) => {
-  const { isLight } = useTheme();
+  const { isDark } = useTheme();
   return (
-    <div className={`layout ${isLight ? 'dark-layout' : ''}`}>
+    <div className={`layout ${isDark ? 'dark-layout' : ''}`}>
       <Navbar />
       <main>{children}</main>
       <Footer />

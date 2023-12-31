@@ -2,12 +2,12 @@ import { useTheme } from '../../../hooks/useTheme';
 import './styles.css';
 
 const Spinner = () => {
-  const { isLight } = useTheme();
+  const { isDark } = useTheme();
 
   return (
     <div className='blogs-status spinner'>
       <div
-        className={`loading-spinner ${isLight ? 'dark-loading-spinner' : ''}`}
+        className={`loading-spinner ${isDark ? 'dark-loading-spinner' : ''}`}
       ></div>
     </div>
   );

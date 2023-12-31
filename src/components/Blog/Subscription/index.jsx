@@ -4,7 +4,7 @@ import './styles.css';
 import { useTheme } from '../../../hooks/useTheme';
 
 const Subscription = () => {
-  const { isLight } = useTheme();
+  const { isDark } = useTheme();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -61,7 +61,7 @@ const Subscription = () => {
     return (
       <p
         className={`blog-error-status ${
-          isLight ? 'dark-blog-error-status' : ''
+          isDark ? 'dark-blog-error-status' : ''
         }`}
       >
         {errorsMsg}
@@ -72,7 +72,7 @@ const Subscription = () => {
   if (isLoading) {
     return (
       <p
-        className={`blog-subscription-spinner ? ${isLight} ? 'dark-blog-subscription-spinner' : ''`}
+        className={`blog-subscription-spinner ? ${isDark} ? 'dark-blog-subscription-spinner' : ''`}
       ></p>
     );
   }
@@ -81,7 +81,7 @@ const Subscription = () => {
     return (
       <p
         className={`blog-success-status ${
-          isLight ? 'dark-blog-success-status' : ''
+          isDark ? 'dark-blog-success-status' : ''
         }`}
       >
         {successMsg}
@@ -100,7 +100,7 @@ const Subscription = () => {
       <form onSubmit={handleSubscribe} className='subscription-form'>
         <input
           className={`subscription-input ${
-            isLight ? 'dark-subscription-input' : ''
+            isDark ? 'dark-subscription-input' : ''
           }`}
           type='email'
           placeholder='Your email'
@@ -111,7 +111,7 @@ const Subscription = () => {
 
         <input
           className={`subscription-input ${
-            isLight ? 'dark-subscription-input' : ''
+            isDark ? 'dark-subscription-input' : ''
           }`}
           type='text'
           placeholder='Your name'
@@ -121,7 +121,7 @@ const Subscription = () => {
 
         <button
           className={`subscription-button ${
-            isLight ? 'dark-subscription-button' : ''
+            isDark ? 'dark-subscription-button' : ''
           }`}
           type='submit'
         >

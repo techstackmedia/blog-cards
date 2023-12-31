@@ -17,13 +17,13 @@ function BlogCard() {
     restaurants,
     pageIndex,
   } = useContext(BlogContext);
-  const { isLight } = useTheme();
+  const { isDark } = useTheme();
 
   const storedEmail = localStorage.getItem('email');
 
   return (
     <>
-      <h1 className={`blog-title ${isLight ? 'dark-blog-title' : ''}`}>
+      <h1 className={`blog-title ${isDark ? 'dark-blog-title' : ''}`}>
         Blog Posts
       </h1>
       <div className='blogs'>
@@ -58,7 +58,7 @@ function BlogCard() {
       />
       {!storedEmail ? (
         <>
-          <hr style={{ width: '90%' }} className={`${isLight} ? 'hr' : ''`} />
+          <hr style={{ width: '90%' }} className={`${isDark} ? 'hr' : ''`} />
           <Subscription />
         </>
       ) : null}

@@ -57,15 +57,24 @@ nav div:last-child {
 }
 
 nav a {
-  color: #000;
+  color: var(--color-black);
   margin: 0 15px;
   font-size: 18px;
   text-decoration: none;
   transition: var(--transition-color);
+  position: relative;
 }
 
-nav a:hover {
-  color: var(--color-button-disable);
+nav a:hover::after {
+  color: var(--main-text-color);
+  position: absolute;
+  content: '';
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 43px;
+  border: 2px solid #1111119b;
+  border-radius: 4px;
 }
 
 a {
@@ -123,8 +132,9 @@ html {
 .nav a {
   color: var(--dark-color-white);
 }
-.nav a:hover {
-  color: var(--dark-color-button-disable);
+.nav a:hover::after {
+  color: #ccc;
+  border: 2px solid #f2f2f2b1;
 }
 .button {
   background-color: var(--dark-background-color);

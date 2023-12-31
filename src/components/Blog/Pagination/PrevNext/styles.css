@@ -9,6 +9,8 @@
 .blog-prevNext-pagination button {
   padding: 10px 20px;
   background-color: var(--bg-color);
+    color: var(--dark-color-white);
+    border: 1px solid var(--main-text-color);
 }
 
 .blog-prevNext-pagination button:disabled {
@@ -19,12 +21,9 @@
 
 .blog-prevNext-pagination .button {
   padding: 10px 20px;
+  border: 1px solid #aaa;
+  border: 1px solid var(--main-text-color);
   background-color: var(--dark-bg-color);
-}
-
-.dark-blog-prevNext-pagination .dark-button:hover {
-  background-color: var(--dark-bg-color);
-  border-color: var(--dark-bg-color);
 }
 
 .dark-blog-prevNext-pagination .dark-button:disabled {

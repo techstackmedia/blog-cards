@@ -3,7 +3,7 @@ import './styles.css';
 import { useTheme } from '../../../hooks/useTheme';
 
 const Sidebar = ({ headings, activeHeading }) => {
-  const { isLight } = useTheme();
+  const { isDark } = useTheme();
   const h3Elements = document.querySelectorAll('h3');
 
   h3Elements.forEach(function (h3Element) {
@@ -21,7 +21,7 @@ const Sidebar = ({ headings, activeHeading }) => {
   );
 
   return (
-    <div className={`sidebar ${isLight ? 'dark-sidebar' : ''}`}>
+    <div className={`sidebar ${isDark ? 'dark-sidebar' : ''}`}>
       <ul>
         {headings.map((heading, index) => {
           const classNames = sections;

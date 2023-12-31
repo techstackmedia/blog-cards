@@ -10,7 +10,7 @@ import Subscription from '../Subscription';
 import { useTheme } from '../../../hooks/useTheme';
 
 const BlogDetail = () => {
-  const { isLight } = useTheme();
+  const { isDark } = useTheme();
   const [readingTime, setReadingTime] = useState(0);
   const { renderHTML, getRestaurantsPost } = useContext(BlogDetailContext);
   const { restaurants, pageIndex } = useContext(BlogContext);
@@ -110,11 +110,11 @@ const BlogDetail = () => {
     <>
       <div className='blog-detail-page'>
         <Sidebar headings={headings} activeHeading={activeHeading} />
-        <div className={`blog-detail ${isLight ? 'dark-blog-detail' : ''}`}>
+        <div className={`blog-detail ${isDark ? 'dark-blog-detail' : ''}`}>
           <div>
             <Link className='blog-detail-link' to={blogPage}>
               {' '}
-              <span className={`arrow ${isLight ? 'dark-arrow' : ''}`}>
+              <span className={`arrow ${isDark ? 'dark-arrow' : ''}`}>
                 &lt;
               </span>
               {blog}
@@ -125,14 +125,14 @@ const BlogDetail = () => {
               <div className='blog-cover'>
                 <h1
                   className={`blog-cover-text ${
-                    isLight ? 'dark-blog-cover-text' : ''
+                    isDark ? 'dark-blog-cover-text' : ''
                   }`}
                 >
                   {restaurant?.attributes?.Name}
                 </h1>
                 <img
                   className={`blog-cover-image ${
-                    isLight ? 'dark-blog-cover-image' : ''
+                    isDark ? 'dark-blog-cover-image' : ''
                   }`}
                   src='http://www.pngmart.com/files/13/Pattern-Transparent-Background.png'
                   alt={`blog cover with text, "${restaurant?.attributes.Name}"`}
@@ -142,7 +142,7 @@ const BlogDetail = () => {
               </div>
               <span
                 className={`blog-content-info ${
-                  isLight ? 'dark-content-info' : ''
+                  isDark ? 'dark-content-info' : ''
                 }`}
               >
                 <span>
@@ -170,7 +170,7 @@ const BlogDetail = () => {
                   title={prevPage === unknownURL ? blogPosts : prevTopic}
                   to={prevPage === unknownURL ? blogPage : prevPage}
                   className={`blog-detail-link ${
-                    isLight ? 'dark-blog-detail-link' : ''
+                    isDark ? 'dark-blog-detail-link' : ''
                   }`}
                 >
                   <span className='arrow'>&lt;</span>
@@ -184,7 +184,7 @@ const BlogDetail = () => {
                 title={nextPage === unknownURL ? blogPosts : nextTopic}
                 to={nextPage === unknownURL ? blogPage : nextPage}
                 className={`blog-detail-link ${
-                  isLight ? 'dark-blog-detail-link' : ''
+                  isDark ? 'dark-blog-detail-link' : ''
                 }`}
               >
                 {nextPage === unknownURL ? blog : 'Next'}
@@ -196,7 +196,7 @@ const BlogDetail = () => {
       </div>
       {!storedEmail ? (
         <>
-          <hr className={`${isLight} ? 'hr' : ''`} />
+          <hr className={`${isDark} ? 'hr' : ''`} />
           <Subscription />
         </>
       ) : null}

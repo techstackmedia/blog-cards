@@ -2,13 +2,13 @@ import { useTheme } from '../../../../hooks/useTheme';
 import './styles.css';
 
 const BlogPagination = ({ prevPage, nextPage, pageCount, pageIndex }) => {
-  const { isLight } = useTheme();
+  const { isDark } = useTheme();
   return (
     <div className='blog-prevNext-pagination'>
       <button
         disabled={pageIndex === 1}
         onClick={prevPage}
-        className={`${isLight ? 'button' : 'default'}`}
+        className={`${isDark ? 'button' : 'default'}`}
       >
         &lt; Previous
       </button>
@@ -16,7 +16,7 @@ const BlogPagination = ({ prevPage, nextPage, pageCount, pageIndex }) => {
       <button
         disabled={pageIndex === pageCount}
         onClick={nextPage}
-        className={`${isLight ? 'button' : 'default'}`}
+        className={`${isDark ? 'button' : 'default'}`}
       >
         Next &gt;
       </button>

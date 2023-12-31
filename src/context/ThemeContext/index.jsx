@@ -46,9 +46,9 @@ const ThemeProvider = ({ children }) => {
       return prevTheme === 'dark' ? 'light' : 'dark';
     });
   };
-  const isLight = currentTheme === 'dark';
+  const isDark = currentTheme === 'dark';
 
-  const theme = { toggleDarkMode, isLight };
+  const theme = { toggleDarkMode, isDark };
   return (
     <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
   );

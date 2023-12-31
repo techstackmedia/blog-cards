@@ -1,12 +1,12 @@
 import { useTheme } from "../../hooks/useTheme";
 
 const Footer = () => {
-  const { isLight } = useTheme();
+  const { isDark } = useTheme();
   const currentYear = new Date().getFullYear();
 
   return (
     <div>
-      <footer className={`${isLight ? 'footer' : ''}`}>
+      <footer className={`${isDark ? 'footer' : ''}`}>
         <p>&copy; {currentYear} Techstack Media</p>
       </footer>
     </div>

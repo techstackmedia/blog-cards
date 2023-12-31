@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 
 const Navbar = () => {
-  const { toggleDarkMode, isLight } = useTheme();
+  const { toggleDarkMode, isDark } = useTheme();
 
   return (
-    <nav className={`${isLight ? 'nav' : ''}`}>
+    <nav className={`${isDark ? 'nav' : ''}`}>
       <div>
         <Link to='/'>Home</Link>
       </div>
@@ -16,13 +16,13 @@ const Navbar = () => {
         <button
           onClick={toggleDarkMode}
           style={{
-            backgroundColor: isLight ? '#fff' : '#1111119b',
-            border: isLight ? '1px solid #fff' : '1px solid #333',
-            color: isLight ? '#000' : '#fff',
+            backgroundColor: isDark ? '#fff' : '#1111119b',
+            border: isDark ? '1px solid #fff' : '1px solid #333',
+            color: isDark ? '#000' : '#fff',
             // fontSize: 16
           }}
         >
-          {isLight ? 'Light Mode 💡' : 'Dark Mode 🌚'}
+          {isDark ? 'Light Mode 💡' : 'Dark Mode 🌚'}
         </button>
       </div>
     </nav>
