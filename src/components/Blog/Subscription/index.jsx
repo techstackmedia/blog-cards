@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { BASE_URL } from '../../../constants/BASE_URL';
 import './styles.css';
+import { useTheme } from '../../../hooks/useTheme';
 
 const Subscription = () => {
+  const { isLight } = useTheme();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -40,14 +42,14 @@ const Subscription = () => {
         localStorage.setItem('email', email);
         setSuccessMsg('Subscription was successful!');
         setTimeout(() => {
-          setSuccessMsg('')
-        }, 3000)
+          setSuccessMsg('');
+        }, 3000);
       }
     } catch (e) {
       seteErrorMsg(e.message);
       setTimeout(() => {
-        seteErrorMsg('')
-      }, 3000)
+        seteErrorMsg('');
+      }, 3000);
     } finally {
       setIsLoading(false);
       setEmail('');
@@ -56,15 +58,35 @@ const Subscription = () => {
   };
 
   if (errorsMsg) {
-    return <p className='blog-error-status'>{errorsMsg}</p>;
+    return (
+      <p
+        className={`blog-error-status ${
+          isLight ? 'dark-blog-error-status' : ''
+        }`}
+      >
+        {errorsMsg}
+      </p>
+    );
   }
 
   if (isLoading) {
-    return <p className='blog-subscription-spinner'></p>;
+    return (
+      <p
+        className={`blog-subscription-spinner ? ${isLight} ? 'dark-blog-subscription-spinner' : ''`}
+      ></p>
+    );
   }
 
   if (successMsg) {
-    return <p className='blog-success-status'>{successMsg}</p>;
+    return (
+      <p
+        className={`blog-success-status ${
+          isLight ? 'dark-blog-success-status' : ''
+        }`}
+      >
+        {successMsg}
+      </p>
+    );
   }
 
   return (
@@ -77,7 +99,9 @@ const Subscription = () => {
 
       <form onSubmit={handleSubscribe} className='subscription-form'>
         <input
-          className='subscription-input'
+          className={`subscription-input ${
+            isLight ? 'dark-subscription-input' : ''
+          }`}
           type='email'
           placeholder='Your email'
           value={email}
@@ -86,7 +110,9 @@ const Subscription = () => {
         />
 
         <input
-          className='subscription-input'
+          className={`subscription-input ${
+            isLight ? 'dark-subscription-input' : ''
+          }`}
           type='text'
           placeholder='Your name'
           value={name}
@@ -94,7 +120,9 @@ const Subscription = () => {
         />
 
         <button
-          className='subscription-button'
+          className={`subscription-button ${
+            isLight ? 'dark-subscription-button' : ''
+          }`}
           type='submit'
         >
           Subscribe

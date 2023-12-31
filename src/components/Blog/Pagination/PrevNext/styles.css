@@ -8,15 +8,27 @@
 
 .blog-prevNext-pagination button {
   padding: 10px 20px;
-}
-
-.blog-prevNext-pagination button:hover {
   background-color: var(--bg-color);
-  border-color: var(--bg-color);
 }
 
 .blog-prevNext-pagination button:disabled {
   background-color: var(--color-button-disable);
   color: var(--main-text-color);
   border-color: var(--color-button-disable);
+}
+
+.blog-prevNext-pagination .button {
+  padding: 10px 20px;
+  background-color: var(--dark-bg-color);
+}
+
+.dark-blog-prevNext-pagination .dark-button:hover {
+  background-color: var(--dark-bg-color);
+  border-color: var(--dark-bg-color);
+}
+
+.dark-blog-prevNext-pagination .dark-button:disabled {
+  background-color: var(--dark-color-button-disable);
+  color: var(--dark-main-text-color);
+  border-color: var(--dark-color-button-disable);
 }

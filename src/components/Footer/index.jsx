@@ -1,8 +1,13 @@
+import { useTheme } from "../../hooks/useTheme";
+
 const Footer = () => {
+  const { isLight } = useTheme();
+  const currentYear = new Date().getFullYear();
+
   return (
     <div>
-      <footer>
-        <p>&copy; 2023 Techstack Media</p>
+      <footer className={`${isLight ? 'footer' : ''}`}>
+        <p>&copy; {currentYear} Techstack Media</p>
       </footer>
     </div>
   );

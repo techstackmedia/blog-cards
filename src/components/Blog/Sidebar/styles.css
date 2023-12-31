@@ -5,7 +5,7 @@
 .sidebar {
   width: 200px;
   position: fixed;
-  top: 50px;
+  top: 100px;
   left: 20px;
 }
 
@@ -36,4 +36,13 @@
 .sidebar .active {
   font-weight: bold;
   color: var(--color-link);
+}
+
+.dark-sidebar a {
+  color: var(--dark-color-black);
+}
+
+.dark-sidebar a:hover,
+.dark-sidebar .active {
+  color: var(--dark-color-link);
 }

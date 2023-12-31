@@ -20,3 +20,8 @@
   height: 50px;
   animation: spin 1s linear infinite;
 }
+
+.dark-loading-spinner {
+  border-top: 8px solid var(--dark-background-color);
+  border: 8px solid rgba(255, 255, 255, 0.1);
+}

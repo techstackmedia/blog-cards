@@ -7,8 +7,10 @@ import { calculateReadingTime, countWords } from '../../../utils/Content';
 import Sidebar from '../Sidebar';
 import './styles.css';
 import Subscription from '../Subscription';
+import { useTheme } from '../../../hooks/useTheme';
 
 const BlogDetail = () => {
+  const { isLight } = useTheme();
   const [readingTime, setReadingTime] = useState(0);
   const { renderHTML, getRestaurantsPost } = useContext(BlogDetailContext);
   const { restaurants, pageIndex } = useContext(BlogContext);
@@ -108,29 +110,41 @@ const BlogDetail = () => {
     <>
       <div className='blog-detail-page'>
         <Sidebar headings={headings} activeHeading={activeHeading} />
-        <div className='blog-detail'>
+        <div className={`blog-detail ${isLight ? 'dark-blog-detail' : ''}`}>
           <div>
             <Link className='blog-detail-link' to={blogPage}>
               {' '}
-              <span className='arrow'>&lt;</span>
+              <span className={`arrow ${isLight ? 'dark-arrow' : ''}`}>
+                &lt;
+              </span>
               {blog}
             </Link>
           </div>
           {!publishedDate ? null : (
             <>
               <div className='blog-cover'>
-                <h1 className='blog-cover-text'>
+                <h1
+                  className={`blog-cover-text ${
+                    isLight ? 'dark-blog-cover-text' : ''
+                  }`}
+                >
                   {restaurant?.attributes?.Name}
                 </h1>
                 <img
-                  className='blog-cover-image'
+                  className={`blog-cover-image ${
+                    isLight ? 'dark-blog-cover-image' : ''
+                  }`}
                   src='http://www.pngmart.com/files/13/Pattern-Transparent-Background.png'
                   alt={`blog cover with text, "${restaurant?.attributes.Name}"`}
                   width='100%'
                   height={250}
                 />
               </div>
-              <span className='blog-content-info'>
+              <span
+                className={`blog-content-info ${
+                  isLight ? 'dark-content-info' : ''
+                }`}
+              >
                 <span>
                   Posted on {dateFormatter(publishedDate)}
                   {update === publish ? null : (
@@ -155,7 +169,9 @@ const BlogDetail = () => {
                 <Link
                   title={prevPage === unknownURL ? blogPosts : prevTopic}
                   to={prevPage === unknownURL ? blogPage : prevPage}
-                  className='blog-detail-link'
+                  className={`blog-detail-link ${
+                    isLight ? 'dark-blog-detail-link' : ''
+                  }`}
                 >
                   <span className='arrow'>&lt;</span>
                   {prevPage === unknownURL ? blog : 'Previous'}
@@ -167,7 +183,9 @@ const BlogDetail = () => {
               <Link
                 title={nextPage === unknownURL ? blogPosts : nextTopic}
                 to={nextPage === unknownURL ? blogPage : nextPage}
-                className='blog-detail-link'
+                className={`blog-detail-link ${
+                  isLight ? 'dark-blog-detail-link' : ''
+                }`}
               >
                 {nextPage === unknownURL ? blog : 'Next'}
                 <span className='arrow'>&gt;</span>
@@ -178,7 +196,7 @@ const BlogDetail = () => {
       </div>
       {!storedEmail ? (
         <>
-          <hr />
+          <hr className={`${isLight} ? 'hr' : ''`} />
           <Subscription />
         </>
       ) : null}

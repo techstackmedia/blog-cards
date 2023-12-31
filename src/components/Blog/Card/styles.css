@@ -3,7 +3,7 @@
   font-size: 36px;
   color: var(--main-text-color);
   margin-bottom: 20px;
-  margin-top: 40px;
+  margin-top: 106px;
 }
 
 .blogs {
@@ -15,4 +15,8 @@
   gap: 5px;
   flex-wrap: wrap;
   margin-inline: auto;
+}
+
+.dark-blog-title {
+  color: var(--dark-main-text-color);
 }

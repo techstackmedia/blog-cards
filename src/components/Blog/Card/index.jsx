@@ -6,6 +6,7 @@ import { contentTruncate } from '../../../utils/Content';
 import { dateFormatter } from '../../../utils/Formatter';
 import { BlogContext } from '../../../context/BlogContext';
 import Subscription from '../Subscription';
+import { useTheme } from '../../../hooks/useTheme';
 
 function BlogCard() {
   const {
@@ -16,12 +17,15 @@ function BlogCard() {
     restaurants,
     pageIndex,
   } = useContext(BlogContext);
+  const { isLight } = useTheme();
 
   const storedEmail = localStorage.getItem('email');
 
   return (
     <>
-      <h1 className='blog-title'>Blog Posts</h1>
+      <h1 className={`blog-title ${isLight ? 'dark-blog-title' : ''}`}>
+        Blog Posts
+      </h1>
       <div className='blogs'>
         <div className='blog-container'>
           {restaurants?.data.map((item) => {
@@ -54,7 +58,7 @@ function BlogCard() {
       />
       {!storedEmail ? (
         <>
-          <hr style={{ width: '90%' }} />
+          <hr style={{ width: '90%' }} className={`${isLight} ? 'hr' : ''`} />
           <Subscription />
         </>
       ) : null}
