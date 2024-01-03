@@ -63,6 +63,7 @@ const Subscription = () => {
         className={`blog-error-status ${
           isDark ? 'dark-blog-error-status' : ''
         }`}
+        style={{ position: 'relative', top: -2 }}
       >
         {errorsMsg}
       </p>
@@ -83,6 +84,7 @@ const Subscription = () => {
         className={`blog-success-status ${
           isDark ? 'dark-blog-success-status' : ''
         }`}
+        style={{ position: 'relative', top: -2 }}
       >
         {successMsg}
       </p>

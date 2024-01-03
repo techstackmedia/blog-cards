@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
+import Search from '../Search';
 
 const Navbar = () => {
   const { toggleDarkMode, isDark } = useTheme();
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [prevScrollPosition, setPrevScrollPosition] = useState(0);
+  const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
 
   const handleScroll = () => {
+    setPrevScrollPosition(scrollPosition);
     setScrollPosition(window.scrollY);
   };
 
@@ -16,40 +20,56 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scrollPosition]);
+
+  const shouldShowNavbar = scrollPosition <= 400;
+  const scrollDirection = scrollPosition > prevScrollPosition ? 'down' : 'up';
+  const showNav = shouldShowNavbar || scrollDirection === 'up';
 
   return (
-    <nav
-      className={`${isDark ? 'nav' : ''}`}
-      style={{
-        backgroundColor:
-          scrollPosition < 400
-            ? isDark
-              ? 'var(--dark-background-color)'
-              : 'var(--color-white)'
-            : isDark
-            ? 'var(--transparent-navbar)'
-            : 'var(--dark-transparent-navbar)',
-      }}
-    >
-      <div>
-        <Link to='/'>Home</Link>
-      </div>
-      <div>
-        <Link to='#/about'>About</Link>
-        <Link to='#/contact'>Contact</Link>
-        <button
-          onClick={toggleDarkMode}
+    <>
+      {showNav && (
+        <nav
+          className={`navbar ${isDark ? 'nav' : ''}`}
           style={{
-            backgroundColor: isDark ? '#fff' : '#1111119b',
-            border: isDark ? '1px solid #fff' : '1px solid #333',
-            color: isDark ? '#000' : '#fff',
+            backgroundColor:
+              scrollPosition < 400
+                ? isDark
+                  ? 'var(--dark-background-color)'
+                  : 'var(--color-white)'
+                : isDark
+                ? 'var(--transparent-navbar)'
+                : 'var(--dark-transparent-navbar)',
           }}
         >
-          {isDark ? 'Light Mode 💡' : 'Dark Mode 🌚'}
-        </button>
-      </div>
-    </nav>
+          <div className='divlink'>
+            <Link className='navlink' to='/'>
+              Home
+            </Link>
+          </div>
+          <Search data={data}/>
+          <div className='divlink' style={{position: 'relative', top: 2}}>
+            <Link className='navlink' to='#/about'>
+              About
+            </Link>
+            <Link className='navlink' to='#/contact'>
+              Contact
+            </Link>
+            <button
+              onClick={toggleDarkMode}
+              style={{
+                backgroundColor: isDark ? '#ffffffde' : '#1111119b',
+                border: isDark ? '1px solid #fff' : '1px solid #333',
+                color: isDark ? '#000' : '#fff',
+              }}
+            >
+              {isDark ? 'Light Mode 💡' : 'Dark Mode 🌚'}
+            </button>
+          </div>
+        </nav>
+      )}
+    </>
   );
 };
 

@@ -22,6 +22,6 @@
 }
 
 .dark-loading-spinner {
-  border-top: 8px solid var(--dark-background-color);
-  border: 8px solid rgba(255, 255, 255, 0.1);
+  border: 8px solid var(--dark-box-shadow-color);
+  border-top: 8px solid var(--color-white);
 }

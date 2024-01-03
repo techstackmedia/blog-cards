@@ -16,6 +16,8 @@ const BlogDetail = () => {
   const { restaurants, pageIndex } = useContext(BlogContext);
   const [activeHeading, setActiveHeading] = useState(null);
   const [headings, setHeadings] = useState([]);
+  const [scrollDirection, setScrollDirection] = useState('down');
+
   const { id } = useParams();
 
   const handleScroll = () => {
@@ -30,6 +32,14 @@ const BlogDetail = () => {
         break;
       }
     }
+    setScrollDirection((prevDirection) =>
+      window.scrollY > 0 &&
+      window.scrollY < document.documentElement.scrollHeight
+        ? window.scrollY > prevDirection
+          ? 'down'
+          : 'up'
+        : 'down'
+    );
   };
 
   useEffect(() => {
@@ -46,7 +56,9 @@ const BlogDetail = () => {
   }, [renderHTML]);
 
   useEffect(() => {
-    getRestaurantsPost(id);
+    if (id) {
+      getRestaurantsPost(id);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -108,6 +120,13 @@ const BlogDetail = () => {
 
   return (
     <>
+      <style>
+        {`
+          h3 {
+            scroll-margin-top: ${scrollDirection === 'up' ? '69px' : ''};
+          }
+        `}
+      </style>
       <div className='blog-detail-page'>
         <Sidebar headings={headings} activeHeading={activeHeading} />
         <div className={`blog-detail ${isDark ? 'dark-blog-detail' : ''}`}>

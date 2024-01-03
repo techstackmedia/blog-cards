@@ -2,15 +2,18 @@ import { createContext, useState } from 'react';
 import { defaultBlogDetailValue } from '../defaultValues';
 import Spinner from '../../components/shared/Spinner';
 import { BASE_URL } from '../../constants/BASE_URL';
+import { useTheme } from '../../hooks/useTheme';
 
 const BlogDetailContext = createContext(defaultBlogDetailValue);
 const BlogDetailProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [detailPost, setDetailPost] = useState(null);
+  const { isDark } = useTheme();
   const getRestaurantsPost = async (id) => {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
+      setError(null);
       const response = await fetch(`${BASE_URL}/restaurants/${id}`, {
         method: 'GET',
         headers: {
@@ -24,6 +27,7 @@ const BlogDetailProvider = ({ children }) => {
       setDetailPost(json);
     } catch (e) {
       setError(e.message);
+      return;
     } finally {
       setIsLoading(false);
     }
@@ -31,9 +35,18 @@ const BlogDetailProvider = ({ children }) => {
 
   if (error && isLoading) {
     return (
-      <div>
+      <div
+        style={{
+          position: 'fixed',
+          display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+          width: '100%',
+          height: '100%',
+          background: isDark ? '' : '#fff',
+        }}
+      >
         <Spinner />
-        <p>{error}</p>
       </div>
     );
   }

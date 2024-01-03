@@ -1,10 +1,10 @@
-import BlogDetail from "../../components/Blog/Detail";
-import Layout from "../../components/shared/Layout";
+import BlogDetail from '../../components/Blog/Detail';
+import Layout from '../../components/shared/Layout';
 
 const Detail = () => {
   return (
     <Layout>
-        <BlogDetail />
+      <BlogDetail />
     </Layout>
   );
 };

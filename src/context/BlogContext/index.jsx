@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../../components/shared/Spinner';
 import { defaultBlogValue } from '../defaultValues';
 import { BASE_URL } from '../../constants/BASE_URL';
+import { useTheme } from '../../hooks/useTheme';
 
 const BlogContext = createContext(defaultBlogValue);
 
@@ -10,6 +11,7 @@ const BlogProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState([null]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { isDark } = useTheme();
 
   const searchParams = new URLSearchParams(window.location.search);
   const initialPageIndex = parseInt(searchParams.get('page')) || 1;
@@ -54,8 +56,9 @@ const BlogProvider = ({ children }) => {
   const pageCount = restaurants?.meta?.pagination.pageCount;
 
   const getAllRestaurants = async () => {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
+      setError(null);
       const response = await fetch(
         `${BASE_URL}/restaurants?pagination[page]=${pageIndex}&pagination[pageSize]=12`,
         {
@@ -82,7 +85,21 @@ const BlogProvider = ({ children }) => {
   }
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+          width: '100%',
+          height: '100%',
+          background: isDark ? '' : '#fff',
+        }}
+      >
+        <Spinner />
+      </div>
+    );
   }
 
   if (!restaurants?.data || restaurants?.data.length === 0) {

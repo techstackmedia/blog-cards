@@ -10,6 +10,6 @@
 }
 
 .dark-layout {
-  background-color: #1111119b;
+  background-color: var(--transparent-navbar);
   color: var(--dark-main-text-color);
 }
