@@ -15,8 +15,6 @@ const Search = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
 
-  console.log(modalRef.current);
-
   useEffect(() => {
     const body = document.body;
 
@@ -169,7 +167,7 @@ const Search = ({ data }) => {
             <span className='close' onClick={handleCloseModal}>
               &times;
             </span>
-            <ul>{modalItems}</ul>
+            {query.length > 0 ? <ul>{modalItems}</ul> : <p>🔍 No results found</p>}
           </div>
         </div>
       ) : null}
