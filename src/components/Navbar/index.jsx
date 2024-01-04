@@ -7,7 +7,6 @@ const Navbar = () => {
   const { toggleDarkMode, isDark } = useTheme();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [prevScrollPosition, setPrevScrollPosition] = useState(0);
-  const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
 
   const handleScroll = () => {
     setPrevScrollPosition(scrollPosition);
@@ -48,8 +47,8 @@ const Navbar = () => {
               Home
             </Link>
           </div>
-          <Search data={data}/>
-          <div className='divlink' style={{position: 'relative', top: 2}}>
+          <Search />
+          <div className='divlink' style={{position: 'relative', top: 2, zIndex: -1}}>
             <Link className='navlink' to='#/about'>
               About
             </Link>

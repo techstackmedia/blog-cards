@@ -21,8 +21,8 @@ const Search = () => {
   useEffect(() => {
     const search = async () => {
       const client = new MeiliSearch({
-        host: 'http://localhost:7700',
-        apiKey: 'aSampleMasterKey',
+        host: process.env.REACT_APP_HOST,
+        apiKey: process.env.REACT_APP_MEILISEARCH_KEY,
       });
       const index = client.index('restaurant');
       try {
