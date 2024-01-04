@@ -44,6 +44,59 @@ const Search = () => {
     setShowModal(false);
   }, []);
 
+  const handleItemClick = useCallback(
+    (item) => {
+      setQuery(item);
+      setSelectedItem(item);
+      handleCloseModal();
+    },
+    [handleCloseModal]
+  );
+
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+    setSelectedItem(null);
+  };
+
+  const handleSearchClick = useCallback(() => {
+    setShowModal(true);
+  }, []);
+
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (event.key === 'Escape') {
+        handleCloseModal();
+      } else if (event.ctrlKey && event.key === 'k') {
+        handleSearchClick();
+      } else if (showModal) {
+        const items = modalRef.current?.querySelectorAll('.search-result');
+        const currentIndex = items
+          ? Array?.from(items).indexOf(document.activeElement)
+          : -1;
+
+        if (event.key === 'ArrowDown' && currentIndex < items?.length - 1) {
+          items[currentIndex + 1].focus();
+        } else if (event.key === 'ArrowUp' && currentIndex > 0) {
+          items[currentIndex - 1].focus();
+        } else if (event.key === 'Enter' && currentIndex !== -1) {
+          handleItemClick(items[currentIndex].innerText);
+        }
+      }
+    },
+    [handleCloseModal, handleItemClick, handleSearchClick, showModal]
+  );
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  useEffect(() => {
+    setSelectedItem(null);
+  }, [showModal]);
+
   const navigate = useNavigate();
 
   const searchResults = results.map((result) => {
@@ -102,59 +155,6 @@ const Search = () => {
       body.style.overflow = 'auto';
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showModal]);
-
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
-    setSelectedItem(null);
-  };
-
-  const handleSearchClick = useCallback(() => {
-    setShowModal(true);
-  }, []);
-
-  const handleItemClick = useCallback(
-    (item) => {
-      setQuery(item);
-      setSelectedItem(item);
-      handleCloseModal();
-    },
-    [handleCloseModal]
-  );
-
-  const handleKeyDown = useCallback(
-    (event) => {
-      if (event.key === 'Escape') {
-        handleCloseModal();
-      } else if (event.ctrlKey && event.key === 'k') {
-        handleSearchClick();
-      } else if (showModal) {
-        const items = modalRef.current?.querySelectorAll('.search-result');
-        const currentIndex = items
-          ? Array?.from(items).indexOf(document.activeElement)
-          : -1;
-
-        if (event.key === 'ArrowDown' && currentIndex < items?.length - 1) {
-          items[currentIndex + 1].focus();
-        } else if (event.key === 'ArrowUp' && currentIndex > 0) {
-          items[currentIndex - 1].focus();
-        } else if (event.key === 'Enter' && currentIndex !== -1) {
-          handleItemClick(items[currentIndex].innerText);
-        }
-      }
-    },
-    [handleCloseModal, handleItemClick, handleSearchClick, showModal]
-  );
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [handleKeyDown]);
-
-  useEffect(() => {
-    setSelectedItem(null);
   }, [showModal]);
 
   return (
