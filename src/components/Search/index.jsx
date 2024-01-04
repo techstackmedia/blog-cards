@@ -40,12 +40,10 @@ const Search = () => {
     search();
   }, [query]);
 
-  useEffect(() => {
-    if (selectedItem !== null) {
-      handleCloseModal();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedItem]);
+  const handleCloseModal = useCallback(() => {
+    setShowModal(false);
+  }, []);
+
   const navigate = useNavigate();
 
   const searchResults = results.map((result) => {
@@ -115,10 +113,6 @@ const Search = () => {
     setShowModal(true);
   }, []);
 
-  const handleCloseModal = useCallback(() => {
-    setShowModal(false);
-  }, []);
-
   const handleItemClick = useCallback(
     (item) => {
       setQuery(item);
@@ -135,7 +129,7 @@ const Search = () => {
       } else if (event.ctrlKey && event.key === 'k') {
         handleSearchClick();
       } else if (showModal) {
-        const items = modalRef.current?.querySelectorAll('li');
+        const items = modalRef.current?.querySelectorAll('.search-result');
         const currentIndex = items
           ? Array?.from(items).indexOf(document.activeElement)
           : -1;
@@ -195,7 +189,13 @@ const Search = () => {
             ref={modalRef}
             className={`modal-content ${isDark ? 'dark-modal-content' : ''}`}
           >
-            <div className='search'>
+            <div
+              className='search'
+              style={{
+                backdropFilter: query?.length > 0 ? 'blur(5px)' : '',
+                WebkitBackdropFilter: query?.length > 0 ? 'blur(5px)' : '',
+              }}
+            >
               <input
                 type='search'
                 value={query}
