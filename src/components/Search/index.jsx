@@ -116,7 +116,7 @@ const Search = () => {
         onClick={handleNavClick}
         className={`search-result ${
           selectedItem === result.Name ? 'selected' : ''
-        }`}
+        } ${isDark ? 'dark-search-result' : ''}`}
         style={{
           border: isDark ? '1px solid var(--dark-color-button-disable)' : '',
           backgroundColor: isDark ? 'var(--transparent-navbar)' : '',
@@ -174,6 +174,8 @@ const Search = () => {
         style={{
           border: !isDark ? '1px solid var(--color-button-disable)' : '',
         }}
+        autoComplete='off'
+        spellCheck={false}
       />
       {showModal ? (
         <div
@@ -181,8 +183,8 @@ const Search = () => {
           aria-labelledby='modal-title'
           className={`search-modal ${isDark ? 'dark-search-modal' : ''}`}
           style={{
-            backdropFilter: query?.length > 0 ? 'blur(7px)' : '',
-            WebkitBackdropFilter: query?.length > 0 ? 'blur(7px)' : '',
+            backdropFilter: query?.trim().length > 0 ? 'blur(7px)' : '',
+            WebkitBackdropFilter: query?.trim().length > 0 ? 'blur(7px)' : '',
           }}
         >
           <div
@@ -192,8 +194,9 @@ const Search = () => {
             <div
               className='search'
               style={{
-                backdropFilter: query?.length > 0 ? 'blur(5px)' : '',
-                WebkitBackdropFilter: query?.length > 0 ? 'blur(5px)' : '',
+                backdropFilter: query?.trim().length > 0 ? 'blur(5px)' : '',
+                WebkitBackdropFilter:
+                  query?.trim().length > 0 ? 'blur(5px)' : '',
               }}
             >
               <input
@@ -202,8 +205,10 @@ const Search = () => {
                 onChange={handleInputChange}
                 onClick={handleSearchClick}
                 placeholder='🔍 Search...'
-                autoFocus
+                autoFocus={true}
                 ref={inputRef}
+                autoComplete='off'
+                spellCheck={false}
                 className={`${isDark ? 'search-input' : ''} ${
                   showModal ? 'visible' : ''
                 }`}
@@ -219,10 +224,15 @@ const Search = () => {
             </span>
             {error ? (
               error
-            ) : query && query.length > 0 ? (
-              <div className='search-results'>{searchResults}</div>
+            ) : query && query.trim().length > 0 ? (
+              <>
+                <div className='search-results'>{searchResults}</div>
+                <p style={{ textAlign: 'center' }}>
+                  You've reached the end! 👋
+                </p>
+              </>
             ) : (
-              <p>🔍 Type to see search results</p>
+              <p>🔍 Type to search blog articles</p>
             )}
           </div>
         </div>

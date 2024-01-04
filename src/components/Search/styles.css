@@ -14,6 +14,26 @@
   outline: none;
 }
 
+.search-modal input[type='search']::-webkit-search-decoration {
+  background: url('https://img.icons8.com/metro/26/000000/delete-sign.png')
+    no-repeat;
+}
+
+.dark-search-modal input[type='search']::-webkit-search-decoration {
+  background: url('https://img.icons8.com/metro/26/ffffff/delete-sign.png')
+    no-repeat;
+}
+
+.search-modal input[type='search']::-webkit-search-decoration,
+.dark-search-modal input[type='search']::-webkit-search-decoration {
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 35px;
+  top: 40px;
+}
+
 .search-results {
   display: grid;
   grid-template-columns: 1fr;
@@ -29,6 +49,14 @@
   color: var(--color-black);
   margin-block: 30px;
   cursor: pointer;
+}
+
+.search-result:focus {
+  outline: 2px solid var(--color-link);
+}
+
+.dark-search-result:focus {
+  outline: 2px solid var(--dark-color-link);
 }
 
 .search-result h4 {
@@ -75,7 +103,6 @@ input {
   background-color: var(--dark-seaarch-input);
   color: var(--color-white);
   outline: none;
-
 }
 
 input[type='search'] {

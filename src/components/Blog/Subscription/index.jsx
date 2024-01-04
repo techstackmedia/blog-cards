@@ -108,6 +108,8 @@ const Subscription = () => {
           placeholder='Your email'
           value={email}
           onChange={handleEmailChange}
+          autoComplete='off'
+          spellCheck={false}
           required
         />
 
@@ -119,6 +121,8 @@ const Subscription = () => {
           placeholder='Your name'
           value={name}
           onChange={handleNameChange}
+          autoComplete='off'
+          spellCheck={false}
         />
 
         <button
