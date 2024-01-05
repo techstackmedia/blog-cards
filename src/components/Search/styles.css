@@ -34,7 +34,10 @@ input[type='search'] {
 
 input[placeholder] {
   font-size: 15px;
-  border: 1px solid var(--main-text-color);
+}
+
+.search-input {
+  background-color: var(--color-transparent-button-disable);
 }
 
 /* Search button and modal styles */
@@ -45,11 +48,6 @@ input[placeholder] {
   display: flex;
   align-items: center;
   padding-inline: 20px;
-}
-
-.search-input {
-  background-color: var(--dark-search-input);
-  color: var(--color-white);
 }
 
 .search-modal {
@@ -135,6 +133,12 @@ input[placeholder] {
 .dark-modal-content {
   background-color: var(--transparent-navbar);
   border: 1px solid var(--dark-background-color);
+}
+
+.dark-search-input {
+  background-color: var(--dark-search-input);
+  color: var(--color-white);
+  border: 1px solid var(--main-text-color);
 }
 
 /* Hidden and visible styles */

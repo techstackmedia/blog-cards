@@ -11,6 +11,7 @@
   --info-color: #777;
   --color-shade: #555;
   --color-button-disable: #ccc;
+  --color-transparent-button-disable: #ffffffe6;
   --background-error: #e91c1c;
   --background-success: #057205;
   --transition-color: color 0.3s ease-in-out;
@@ -21,6 +22,7 @@
   --dark-main-text-color: #fff;
   --dark-box-shadow-color: rgba(255, 255, 255, 0.1);
   --dark-background-color: #222;
+  --dark-transparent-background-color: #222222eb;
   --dark-color-white: #fff;
   --dark-color-black: #fff;
   --dark-color-link: #9696ff;
@@ -237,8 +239,8 @@ input[type='search']::-webkit-search-cancel-button {
   color: var(--dark-color-button-disable);
 }
 
-input.search-input {
-  background-color: var(--dark-background-color);
+input.dark-search-input {
+  background-color: var(--dark-transparent-background-color);
 }
 
 .dark-button {

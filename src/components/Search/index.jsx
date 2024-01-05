@@ -168,7 +168,7 @@ const Search = () => {
         onChange={handleInputChange}
         onClick={handleSearchClick}
         placeholder='🔍 Search...'
-        className={`${isDark ? 'search-input' : ''} ${
+        className={`${isDark ? 'dark-search-input' : 'search-input'} ${
           showModal ? 'hidden' : ''
         }`}
         style={{
@@ -209,7 +209,7 @@ const Search = () => {
                 ref={inputRef}
                 autoComplete='off'
                 spellCheck={false}
-                className={`${isDark ? 'search-input' : ''} ${
+                className={`${isDark ? 'dark-search-input' : 'search-input'} ${
                   showModal ? 'visible' : ''
                 }`}
                 style={{
