@@ -32,9 +32,9 @@ const BlogDetail = () => {
         break;
       }
     }
+
     setScrollDirection((prevDirection) =>
-      window.scrollY > 0 &&
-      window.scrollY < document.documentElement.scrollHeight
+      window.scrollY >= 663
         ? window.scrollY > prevDirection
           ? 'down'
           : 'up'
@@ -146,13 +146,13 @@ const BlogDetail = () => {
   if (!content) {
     return null;
   }
-
+  
   return (
     <>
       <style>
         {`
           h3 {
-            scroll-margin-top: ${scrollDirection === 'up' ? '69px' : ''};
+            scroll-margin-top: ${scrollDirection === 'up' ? '70px' : '40px'};
           }
         `}
       </style>
