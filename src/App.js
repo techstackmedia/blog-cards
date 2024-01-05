@@ -13,6 +13,8 @@ function App() {
           <BlogDetailProvider>
             <Routes>
               <Route path='/' element={<Home />}></Route>
+              <Route path='/about' element={<Home />}></Route>
+              <Route path='/contact' element={<Home />}></Route>
               <Route path='/:id' element={<Detail />}></Route>
             </Routes>
           </BlogDetailProvider>

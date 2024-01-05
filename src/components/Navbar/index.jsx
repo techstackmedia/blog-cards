@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 import Search from '../Search';
 
@@ -25,6 +25,7 @@ const Navbar = () => {
   const shouldShowNavbar = scrollPosition <= 400;
   const scrollDirection = scrollPosition > prevScrollPosition ? 'down' : 'up';
   const showNav = shouldShowNavbar || scrollDirection === 'up';
+  const {pathname} = useLocation()
 
   return (
     <>
@@ -43,16 +44,16 @@ const Navbar = () => {
           }}
         >
           <div className='divlink'>
-            <Link className='navlink' to='/'>
+            <Link className={`navlink ${pathname === '/' ? 'active' : ''} ${isDark ? 'dark-active' : ''}`} to='/'>
               Home
             </Link>
           </div>
           <Search />
           <div className='divlink' style={{position: 'relative', top: 2, zIndex: -1}}>
-            <Link className='navlink' to='#/about'>
+            <Link className={`navlink ${pathname === '/about' ? 'active' : ''} ${isDark ? 'dark-active' : ''}`} to='/about'>
               About
             </Link>
-            <Link className='navlink' to='#/contact'>
+            <Link className={`navlink ${pathname === '/contact' ? 'active' : ''} ${isDark ? 'dark-active' : ''}`} to='/contact'>
               Contact
             </Link>
             <button
