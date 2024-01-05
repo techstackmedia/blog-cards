@@ -213,6 +213,25 @@ input[type='search']::-webkit-search-cancel-button {
   border: none;
   border-top: 1px solid var(--dark-color-button-disable);
 }
+h3 {
+  cursor: pointer;
+  display: inline-block;
+}
+
+h3::after {
+  position: relative;
+  left: 5px;
+  display: none;
+}
+h3:hover::after {
+  display: inline;
+}
+h3::after {
+  content: url(https://img.icons8.com/metro/20/link.png);
+}
+.dark-blog-detail h3::after {
+  content: url(https://img.icons8.com/ffffff/metro/20/link.png);
+}
 
 @media (min-width: 0) {
   .blog-card {

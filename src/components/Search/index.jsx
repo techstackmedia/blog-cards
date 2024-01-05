@@ -228,7 +228,9 @@ const Search = () => {
               <>
                 <div className='search-results'>{searchResults}</div>
                 <p style={{ textAlign: 'center' }}>
-                  You've reached the end! 👋
+                  {query.trim().length > 0 && results.length > 0
+                    ? "You've reached the end! 👋 "
+                    : '🔍 Search result not found'}
                 </p>
               </>
             ) : (

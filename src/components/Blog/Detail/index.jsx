@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { BlogDetailContext } from '../../../context/BlogDetailContext';
 import { BlogContext } from '../../../context/BlogContext';
@@ -44,6 +44,18 @@ const BlogDetail = () => {
 
   useEffect(() => {
     const headings = document.querySelectorAll('h3');
+
+    const handleHeadingClick = (event) => {
+      const sectionId = event.target.id;
+      if (sectionId) {
+        window.location.hash = sectionId;
+      }
+    };
+
+    headings.forEach((heading) => {
+      heading.addEventListener('click', handleHeadingClick);
+    });
+
     const headingTexts = Array.from(headings).map(
       (heading) => heading.textContent
     );
@@ -52,6 +64,9 @@ const BlogDetail = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      headings.forEach((heading) => {
+        heading.removeEventListener('click', handleHeadingClick);
+      });
     };
   }, [renderHTML]);
 
@@ -111,6 +126,20 @@ const BlogDetail = () => {
   const blogPosts = 'Blog Posts';
   const blogPage = `/?page=${pageIndex}`;
   const blog = 'Blog';
+
+  const divRef1 = useRef(null);
+  const divRef2 = useRef(null);
+  const [height1, setHeight1] = useState(0);
+  const [height2, setHeight2] = useState(0);
+
+  useEffect(() => {
+    if (divRef1.current || divRef2.current) {
+      const divHeight1 = divRef1.current.clientHeight;
+      setHeight1(divHeight1);
+      const divHeight2 = divRef2.current.clientHeight;
+      setHeight2(divHeight2);
+    }
+  }, [prevPage, prevTopic, isDark]);
 
   const storedEmail = localStorage.getItem('email');
 
@@ -182,31 +211,86 @@ const BlogDetail = () => {
             className='blog-content-description'
             dangerouslySetInnerHTML={renderedHTML}
           />
-          <div className='blog-detail-links'>
+          <div className='blog-detail-links' style={{ margin: '50px 0 0' }}>
             <div>
-              <div>
+              <div ref={divRef1}>
                 <Link
                   title={prevPage === unknownURL ? blogPosts : prevTopic}
                   to={prevPage === unknownURL ? blogPage : prevPage}
                   className={`blog-detail-link ${
                     isDark ? 'dark-blog-detail-link' : ''
                   }`}
+                  style={{
+                    display: 'flex',
+                    gap: 15,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
                 >
                   <span className='arrow'>&lt;</span>
-                  {prevPage === unknownURL ? blog : 'Previous'}
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      height: height1,
+                      flexDirection: 'column',
+                      width: 230,
+                      gap: 5,
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: isDark
+                          ? 'var(--color-white)'
+                          : 'var(--color-black)',
+                      }}
+                    >
+                      {prevPage === unknownURL ? blog : 'Previous'}
+                    </div>
+                    <div>{prevPage === unknownURL ? `Posts` : prevTopic}</div>
+                  </div>
                 </Link>
               </div>
             </div>
 
-            <div>
+            <div ref={divRef2}>
               <Link
                 title={nextPage === unknownURL ? blogPosts : nextTopic}
                 to={nextPage === unknownURL ? blogPage : nextPage}
                 className={`blog-detail-link ${
                   isDark ? 'dark-blog-detail-link' : ''
                 }`}
+                style={{
+                  display: 'flex',
+                  gap: 15,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
               >
-                {nextPage === unknownURL ? blog : 'Next'}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    height: height2,
+                    alignItems: 'flex-end',
+                    flexDirection: 'column',
+                    width: 230,
+                    gap: 5,
+                  }}
+                >
+                  <div
+                    style={{
+                      color: isDark
+                        ? 'var(--color-white)'
+                        : 'var(--color-black)',
+                    }}
+                  >
+                    {nextPage === unknownURL ? blog : 'Next'}
+                  </div>
+                  <div>{nextPage === unknownURL ? `Posts` : nextTopic}</div>
+                </div>
+
                 <span className='arrow'>&gt;</span>
               </Link>
             </div>
