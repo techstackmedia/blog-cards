@@ -84,7 +84,6 @@
 }
 
 .dark-blog-card {
-  background-color: var(--transparent-navbar);
   border: 1px solid var(--dark-bg-color);
 }
 

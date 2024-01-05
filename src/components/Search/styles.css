@@ -89,6 +89,7 @@ input {
 
 .search-container input[placeholder] {
   font-size: 15px;
+  border: 1px solid var(--main-text-color);
 }
 
 .search {
