@@ -11,9 +11,6 @@
   gap: 10px;
   margin-top: 20px;
   width: 100%;
-}
-
-.subscription-form {
   font-weight: bold;
   text-align: left;
 }
@@ -27,15 +24,13 @@
 
 .subscription-button {
   padding: 10px;
-  background-color: var(--bg-color);
-  color: var(--color-white);
-  border: 1px solid var(--color-white);
-  cursor: pointer;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .subscription-button:hover {
   background-color: var(--background-color);
+  border: 1px solid var(--main-text-color);
 }
 
 .blog-error-status,
@@ -50,15 +45,15 @@
 }
 
 .blog-error-status {
+  width: 380px;
   background-color: var(--background-error);
   border: 1px solid var(--background-error);
-  width: 380px;
 }
 
 .blog-success-status {
+  width: 300px;
   background-color: var(--background-success);
   border: 1px solid var(--background-success);
-  width: 300px;
 }
 
 @keyframes spin {
@@ -80,11 +75,13 @@
 .dark-subscription-input {
   border: 1px solid var(--dark-color-button-disable);
 }
+
 .dark-subscription-button {
   background-color: var(--dark-bg-color);
   color: var(--dark-color-white);
   border: 1px solid var(--main-text-color);
 }
+
 .dark-subscription-button:hover {
   background-color: var(--dark-background-color);
   border: 1px solid var(--main-text-color);

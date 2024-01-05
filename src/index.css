@@ -1,3 +1,4 @@
+/* General Styles */
 :root {
   /* Light Mode */
   --main-text-color: #333;
@@ -14,14 +15,12 @@
   --background-success: #057205;
   --transition-color: color 0.3s ease-in-out;
   --transparent-navbar: #1111119b;
-  /* --transparent-navbar: #000e249b; */
   --modal-content: #7f9cfbf2;
 
   /* Dark Mode */
   --dark-main-text-color: #fff;
   --dark-box-shadow-color: rgba(255, 255, 255, 0.1);
   --dark-background-color: #222;
-  /* --dark-background-color: #000; */
   --dark-color-white: #fff;
   --dark-color-black: #fff;
   --dark-color-link: #9696ff;
@@ -44,6 +43,8 @@ html {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  background-color: var(--dark-background-color);
+  color: var(--dark-main-text-color);
 }
 
 nav {
@@ -100,6 +101,25 @@ a {
   text-decoration: none;
 }
 
+h3 {
+  cursor: pointer;
+  display: inline-block;
+}
+
+h3::after {
+  position: relative;
+  left: 5px;
+  display: none;
+}
+
+h3:hover::after {
+  display: inline;
+}
+
+h3::after {
+  content: url(https://img.icons8.com/metro/20/link.png);
+}
+
 button {
   background-color: var(--background-color);
   padding: 10px 17px;
@@ -151,41 +171,44 @@ hr {
   border-top: 1px solid var(--color-button-disable);
 }
 
-body,
-html {
-  background-color: var(--dark-background-color);
-  color: var(--dark-main-text-color);
-}
+/* Dark Mode Styles */
 .nav {
   background-color: var(--dark-background-color);
   border: 1px solid var(--main-text-color);
 }
+
 .nav a {
   color: var(--dark-color-white);
 }
+
 .nav a:hover::after {
   color: #ccc;
   border: 2px solid #f2f2f2b1;
 }
+
 .button {
   background-color: var(--dark-background-color);
   color: var(--dark-color-white);
   border: 1px solid var(--dark-background-color);
 }
+
 .button:hover {
   background-color: var(--dark-background-color);
   border: 1px solid var(--main-text-color);
 }
+
 .button:disabled {
   background-color: var(--dark-color-button-disable);
   color: var(--dark-main-text-color);
   border-color: var(--dark-main-text-color);
 }
+
 .footer {
   background-color: var(--dark-background-color);
   border-top: 1px solid var(--main-text-color);
   color: var(--dark-color-white);
 }
+
 input[type='search']::-webkit-search-cancel-button {
   display: none;
   background-color: #fff;
@@ -201,53 +224,50 @@ input[type='search']::-webkit-search-cancel-button {
   background-color: var(--dark-background-color);
   color: var(--dark-main-text-color);
 }
+
 .dark-nav {
   background-color: var(--dark-background-color);
 }
+
 .dark-a {
   color: var(--dark-color-white);
 }
+
 .dark-nav .dark-a:hover {
   color: var(--dark-color-button-disable);
 }
+
+input.search-input {
+  background-color: var(--dark-background-color);
+}
+
 .dark-button {
   background-color: var(--dark-background-color);
   color: var(--dark-color-white);
   border: 1px solid var(--dark-background-color);
 }
+
 .dark-button:hover {
   background-color: var(--dark-background-color);
   border: 1px solid var(--main-text-color);
 }
+
 .dark-button:disabled {
   background-color: var(--dark-color-button-disable);
   color: var(--dark-main-text-color);
   border-color: var(--dark-main-text-color);
 }
+
 .dark-footer {
   background-color: var(--dark-background-color);
   color: var(--dark-color-white);
 }
+
 .dark-hr {
   border: none;
   border-top: 1px solid var(--dark-color-button-disable);
 }
-h3 {
-  cursor: pointer;
-  display: inline-block;
-}
 
-h3::after {
-  position: relative;
-  left: 5px;
-  display: none;
-}
-h3:hover::after {
-  display: inline;
-}
-h3::after {
-  content: url(https://img.icons8.com/metro/20/link.png);
-}
 .dark-blog-detail h3::after {
   content: url(https://img.icons8.com/ffffff/metro/20/link.png);
 }

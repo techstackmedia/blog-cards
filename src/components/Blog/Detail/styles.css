@@ -85,12 +85,15 @@
 .dark-blog-cover-text {
   color: var(--dark-color-white);
 }
+
 .dark-blog-content-info {
   color: var(--dark-info-color);
 }
+
 .dark-blog-detail-link span {
   color: var(--dark-color-black);
 }
+
 .dark-blog-detail a:visited,
 .dark-blog-detail a {
   color: var(--dark-color-link);
@@ -99,9 +102,11 @@
 .dark-blog-cover-text {
   color: var(--dark-color-white);
 }
-.dark-.blog-content-info {
+
+.dark-blog-content-info {
   color: var(--dark-info-color);
 }
+
 .dark-blog-detail-link span {
   color: var(--dark-color-black);
 }

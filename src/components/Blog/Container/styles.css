@@ -1,3 +1,4 @@
+/* Common styles for both light and dark themes */
 .blog-card {
   border: 1px solid var(--color-button-disable);
   border-radius: 8px;
@@ -83,6 +84,7 @@
   color: var(--color-white);
 }
 
+/* Dark theme styles */
 .dark-blog-card {
   border: 1px solid var(--dark-bg-color);
 }
@@ -94,16 +96,20 @@
 .dark-blog-card-image > .dark-blog-card-title {
   color: var(--dark-color-white);
 }
+
 .dark-blog-card-description {
   color: var(--dark-color-shade);
 }
+
 .dark-blog-card-title a,
 .dark-blog-card-description a {
   color: var(--dark-main-text-color);
 }
+
 .dark-blog-card-published-date {
   color: var(--dark-info-color);
 }
+
 .dark-blog-card-link {
   border: 1px solid var(--dark-background-color);
   background-color: var(--dark-color-white);
