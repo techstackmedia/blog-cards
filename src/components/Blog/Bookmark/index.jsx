@@ -1,39 +1,73 @@
-import BlogPagination from '../Pagination/PrevNext';
-import './styles.css';
-import BlogContainer from '../Container';
-import { useContext } from 'react';
-import { contentTruncate } from '../../../utils/Content';
-import { dateFormatter } from '../../../utils/Formatter';
+import { useContext, useEffect, useState } from 'react';
 import { BlogContext } from '../../../context/BlogContext';
-import Subscription from '../Subscription';
 import { useTheme } from '../../../hooks/useTheme';
+import { dateFormatter } from '../../../utils/Formatter';
+import { contentTruncate } from '../../../utils/Content';
+import BlogContainer from '../Container';
+import BlogPagination from '../Pagination/PrevNext';
+import Subscription from '../Subscription';
+import { BASE_URL } from '../../../constants/BASE_URL';
+import Spinner from '../../shared/Spinner';
 
-function BlogCard() {
+const BookMark = () => {
   const {
     prevPage,
     nextPage,
     pageCount,
     handleArticleNav,
-    restaurants,
     pageIndex,
-    updateBookmarks,
   } = useContext(BlogContext);
   const { isDark } = useTheme();
+  const [bookMark, setBookMark] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const storedEmail = localStorage.getItem('email');
 
-  const handleDeleteClick = async (id) => {
-    updateBookmarks(id);
+  useEffect(() => {
+    void getAllBookmark();
+  }, []);
+
+  const getAllBookmark = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`${BASE_URL}/bookmarks`, {
+        method: 'GET',
+        'Content-Type': 'application/json',
+      });
+      if (!response.ok) {
+        throw new Error('Error in getting all bookmarked items!');
+      } else {
+        const json = await response.json()
+        setBookMark(json);
+      }
+    } catch (e) {
+      setError(e.message);
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    } finally {
+      setIsLoading(false);
+    }
   };
+  console.log(bookMark)
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
       <h1 className={`blog-title ${isDark ? 'dark-blog-title' : ''}`}>
-        Blog Posts
+        Bookmarked Blog Posts
       </h1>
       <div className='blogs'>
         <div className='blog-container'>
-          {restaurants?.data.map((item) => {
+          {bookMark?.data.map((item) => {
             const cardTitle = item.attributes.Name;
             const dateString = item.attributes.publishedAt;
             const formattedDate = dateFormatter(dateString);
@@ -45,7 +79,6 @@ function BlogCard() {
               <BlogContainer
                 key={item.id}
                 handleArticleNav={handleArticleNav}
-                handleDeleteClick={() => handleDeleteClick(item.id)}
                 item={item}
                 cardTitle={cardTitle}
                 cardDescription={content}
@@ -70,6 +103,6 @@ function BlogCard() {
       ) : null}
     </>
   );
-}
+};
 
-export default BlogCard;
+export default BookMark;

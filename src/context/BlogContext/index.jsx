@@ -8,7 +8,8 @@ import { useTheme } from '../../hooks/useTheme';
 const BlogContext = createContext(defaultBlogValue);
 
 const BlogProvider = ({ children }) => {
-  const [restaurants, setRestaurants] = useState([null]);
+  const [restaurants, setRestaurants] = useState({ data: [] });
+  const [deletedItemId, setDeletedItemId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const { isDark } = useTheme();
@@ -18,6 +19,12 @@ const BlogProvider = ({ children }) => {
 
   const [pageIndex, setPageIndex] = useState(initialPageIndex);
 
+  const updateBookmarks = (id) => {
+    setRestaurants((prevRestaurants) => ({
+      data: prevRestaurants.data.filter((item) => item.id !== id),
+    }));
+    setDeletedItemId(id); 
+  };
   useEffect(() => {
     void getAllRestaurants();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,6 +117,8 @@ const BlogProvider = ({ children }) => {
       value={{
         prevPage,
         nextPage,
+        updateBookmarks,
+        deletedItemId,
         pageCount,
         handleArticleNav,
         restaurants,
