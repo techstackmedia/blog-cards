@@ -27,6 +27,7 @@ const BlogContainer = ({
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [bookmark, setBookMark] = useState(null);
   const [errorDelete, setErrorDelete] = useState(null);
   const [success, setSuccess] = useState(null);

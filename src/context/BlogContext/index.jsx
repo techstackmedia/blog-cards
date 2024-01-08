@@ -24,6 +24,7 @@ const BlogProvider = ({ children }) => {
       data: prevRestaurants.data.filter((item) => item.id !== id),
     }));
     setDeletedItemId(id); 
+    window.location.reload()
   };
   useEffect(() => {
     void getAllRestaurants();
