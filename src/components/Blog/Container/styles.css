@@ -1,0 +1,122 @@
+/* Common styles for both light and dark themes */
+.blog-card {
+  border: 1px solid var(--color-button-disable);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px;
+  box-shadow: 0 4px 8px var(--box-shadow-color);
+  transition: transform 0.3s ease-in-out;
+}
+
+.blog-card:hover {
+  transform: scale(1.05);
+}
+
+.blog-card-image {
+  width: 100%;
+  height: 45%;
+  position: relative;
+  background: url(http://www.pngmart.com/files/13/Pattern-Transparent-Background.png)
+    center bottom no-repeat;
+  background-color: var(--background-color);
+  background-size: cover;
+}
+
+.blog-card-image > .blog-card-title {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--color-white);
+  cursor: pointer;
+  text-align: center;
+}
+
+.blog-card-content {
+  padding: 20px;
+}
+
+.blog-card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: -2px;
+}
+
+.blog-card-title a,
+.blog-card-description a {
+  color: var(--main-text-color);
+}
+
+.blog-card-description {
+  color: var(--color-shade);
+  margin-top: -10px;
+}
+
+.blog-card-published-date {
+  color: var(--info-color);
+  margin-top: -14px;
+  text-align: center;
+}
+
+.blog-card-link {
+  margin: 20px auto;
+  padding: 10px 20px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid var(--background-color);
+  background-color: var(--color-white);
+  text-decoration: none;
+  font-size: 15px;
+  color: var(--background-color);
+  transition: background-color 0.3s ease-in-out, var(--transition-color);
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.blog-card-link:hover {
+  background-color: var(--background-color);
+  color: var(--color-white);
+}
+
+/* Dark theme styles */
+.dark-blog-card {
+  border: 1px solid var(--dark-bg-color);
+}
+
+.dark-blog-card:hover {
+  border: 1px solid var(--dark-color-button-disable);
+}
+
+.dark-blog-card-image > .dark-blog-card-title {
+  color: var(--dark-color-white);
+}
+
+.dark-blog-card-description {
+  color: var(--dark-color-shade);
+}
+
+.dark-blog-card-title a,
+.dark-blog-card-description a {
+  color: var(--dark-main-text-color);
+}
+
+.dark-blog-card-published-date {
+  color: var(--dark-info-color);
+}
+
+.dark-blog-card-link {
+  border: 1px solid var(--dark-background-color);
+  background-color: var(--dark-color-white);
+  color: var(--dark-background-color);
+}
+
+.dark-blog-card-link:hover {
+  background-color: var(--dark-background-color);
+  color: var(--dark-color-white);
+}

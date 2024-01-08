@@ -1,0 +1,15 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.dark-layout {
+  background-color: var(--transparent-navbar);
+  color: var(--dark-main-text-color);
+}
