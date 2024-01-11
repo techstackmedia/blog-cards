@@ -50,7 +50,6 @@ const BookMark = () => {
       setIsLoading(false);
     }
   };
-  console.log(bookMark)
 
   if (error) {
     return <p>{error}</p>;

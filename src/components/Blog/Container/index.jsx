@@ -15,7 +15,8 @@ const BlogContainer = ({
   handleArticleNav,
   cardDescription,
 }) => {
-  const { restaurants, updateBookmarks, deletedItemId } = useContext(BlogContext);
+  const { restaurants, updateBookmarks, deletedItemId } =
+    useContext(BlogContext);
   useEffect(() => {
     const wordsPerMinute = 225;
     const wordCount = countWords(cardDescription);
@@ -27,6 +28,7 @@ const BlogContainer = ({
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [bookmark, setBookMark] = useState(null);
   const [errorDelete, setErrorDelete] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -121,16 +123,24 @@ const BlogContainer = ({
 
   return (
     <div className={`blog-card ${isDark ? 'dark-blog-card' : ''}`}>
-      <p
+      <div
         onClick={
           pathname === '/bookmark'
             ? () => handleDelete(item.id)
             : () => handleBookMark(item.id)
         }
-        style={{ cursor: 'pointer' }}
+        style={{
+          cursor: 'pointer',
+          position: 'absolute',
+          bottom: 5,
+          color: '#fff',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'space-around',
+        }}
       >
         {pathname === '/bookmark' ? 'Delete' : 'Save'}
-      </p>
+      </div>
       <div
         className={`blog-card-image ${
           isDark ? 'blog-card-image' : 'dark-blog-card-image'
