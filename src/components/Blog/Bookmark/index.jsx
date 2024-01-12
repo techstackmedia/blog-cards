@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { BlogContext } from '../../../context/BlogContext';
 import { useTheme } from '../../../hooks/useTheme';
 import { dateFormatter } from '../../../utils/Formatter';
@@ -6,7 +6,6 @@ import { contentTruncate } from '../../../utils/Content';
 import BlogContainer from '../Container';
 import BlogPagination from '../Pagination/PrevNext';
 import Subscription from '../Subscription';
-import { BASE_URL } from '../../../constants/BASE_URL';
 import Spinner from '../../shared/Spinner';
 
 const BookMark = () => {
@@ -16,48 +15,14 @@ const BookMark = () => {
     pageCount,
     handleArticleNav,
     pageIndex,
+    bookMark,
+    errorDelete,
+    successDelete,
+    isDeleteLoading,
   } = useContext(BlogContext);
   const { isDark } = useTheme();
-  const [bookMark, setBookMark] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const storedEmail = localStorage.getItem('email');
-
-  useEffect(() => {
-    void getAllBookmark();
-  }, []);
-
-  const getAllBookmark = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(`${BASE_URL}/bookmarks`, {
-        method: 'GET',
-        'Content-Type': 'application/json',
-      });
-      if (!response.ok) {
-        throw new Error('Error in getting all bookmarked items!');
-      } else {
-        const json = await response.json()
-        setBookMark(json);
-      }
-    } catch (e) {
-      setError(e.message);
-      setTimeout(() => {
-        setError(null);
-      }, 3000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <>
@@ -87,6 +52,13 @@ const BookMark = () => {
             );
           })}
         </div>
+        {isDeleteLoading ? (
+          <Spinner />
+        ) : errorDelete ? (
+          errorDelete
+        ) : successDelete ? (
+          successDelete
+        ) : null}
       </div>
       <BlogPagination
         pageIndex={pageIndex}

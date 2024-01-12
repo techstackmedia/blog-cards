@@ -15,7 +15,7 @@ const BlogContainer = ({
   handleArticleNav,
   cardDescription,
 }) => {
-  const { restaurants, updateBookmarks, deletedItemId } =
+  const { restaurants, deleteBookmark } =
     useContext(BlogContext);
   useEffect(() => {
     const wordsPerMinute = 225;
@@ -27,10 +27,8 @@ const BlogContainer = ({
   const { isDark } = useTheme();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [bookmark, setBookMark] = useState(null);
-  const [errorDelete, setErrorDelete] = useState(null);
   const [success, setSuccess] = useState(null);
   const { pathname } = useLocation();
 
@@ -40,35 +38,7 @@ const BlogContainer = ({
     };
   }, []);
 
-  if (deletedItemId === item.id) {
-    return null;
-  }
-
   const restaurantList = restaurants.data;
-
-  const handleDelete = async (id) => {
-    try {
-      const response = await fetch(`${BASE_URL}/bookmarks/${id}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) {
-        throw new Error('Error in deleting bookmarked item');
-      } else {
-        updateBookmarks(id);
-        setSuccess('Item successfully deleted!');
-        setTimeout(() => {
-          setSuccess(null);
-        }, 3000);
-      }
-    } catch (e) {
-      setErrorDelete(e.message);
-      setTimeout(() => {
-        setErrorDelete(null);
-      }, 3000);
-    } finally {
-      setIsDeleteLoading(false);
-    }
-  };
 
   const handleBookMark = async (id) => {
     const restaurant = restaurantList.find((item) => {
@@ -107,16 +77,11 @@ const BlogContainer = ({
 
   if (error) {
     return <p>{error}</p>;
-  } else if (errorDelete) {
-    return <p>{errorDelete}</p>;
   }
 
   if (isLoading) {
     return <Spinner />;
-  } else if (isDeleteLoading) {
-    return <Spinner />;
-  }
-
+  } 
   if (success) {
     return <p>{success}</p>;
   }
@@ -126,7 +91,7 @@ const BlogContainer = ({
       <div
         onClick={
           pathname === '/bookmark'
-            ? () => handleDelete(item.id)
+            ? () => deleteBookmark(item.id)
             : () => handleBookMark(item.id)
         }
         style={{
