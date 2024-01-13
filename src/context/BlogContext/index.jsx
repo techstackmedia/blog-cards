@@ -31,6 +31,8 @@ const BlogProvider = ({ children }) => {
     void getAllBookmark();
   }, []);
 
+  const authToken = localStorage.getItem('auth_token')
+
   const getAllBookmark = async () => {
     try {
       setIsLoading(true);
@@ -60,6 +62,9 @@ const BlogProvider = ({ children }) => {
     try {
       const response = await fetch(`${BASE_URL}/bookmarks/${id}`, {
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        }
       });
       if (!response.ok) {
         throw new Error('Error in deleting item.');
@@ -178,6 +183,7 @@ const BlogProvider = ({ children }) => {
         errorDelete,
         successDelete,
         isDeleteLoading,
+        authToken,
         pageCount,
         deleteBookmark,
         handleArticleNav,

@@ -7,6 +7,8 @@ import BlogContainer from '../Container';
 import BlogPagination from '../Pagination/PrevNext';
 import Subscription from '../Subscription';
 import Spinner from '../../shared/Spinner';
+import Footer from '../../Footer';
+import Navbar from '../../Navbar';
 
 const BookMark = () => {
   const {
@@ -26,6 +28,7 @@ const BookMark = () => {
 
   return (
     <>
+      <Navbar />
       <h1 className={`blog-title ${isDark ? 'dark-blog-title' : ''}`}>
         Bookmarked Blog Posts
       </h1>
@@ -68,8 +71,10 @@ const BookMark = () => {
       />
       {!storedEmail ? (
         <>
+          <Navbar />
           <hr style={{ width: '90%' }} className={`${isDark} ? 'hr' : ''`} />
           <Subscription />
+          <Footer />
         </>
       ) : null}
     </>

@@ -5,6 +5,7 @@ import { BlogProvider } from './context/BlogContext';
 import { BlogDetailProvider } from './context/BlogDetailContext';
 import { ThemeProvider } from './context/ThemeContext';
 import BookMark from './components/Blog/Bookmark';
+import Register from './components/Blog/Auth/Register';
 
 function App() {
   return (
@@ -14,10 +15,11 @@ function App() {
           <BlogDetailProvider>
             <Routes>
               <Route path='/' element={<Home />}></Route>
-              <Route path='/about' element={<Home />}></Route>
+              <Route path='/bookmark' element={<BookMark />}></Route>
               <Route path='/contact' element={<Home />}></Route>
               <Route path='/:id' element={<Detail />}></Route>
               <Route path='/bookmark' element={<BookMark />}></Route>
+              <Route path='/register' element={<Register />}></Route>
             </Routes>
           </BlogDetailProvider>
         </BlogProvider>

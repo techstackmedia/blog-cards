@@ -15,7 +15,7 @@ const BlogContainer = ({
   handleArticleNav,
   cardDescription,
 }) => {
-  const { restaurants, deleteBookmark } =
+  const { restaurants, deleteBookmark, authToken } =
     useContext(BlogContext);
   useEffect(() => {
     const wordsPerMinute = 225;
@@ -56,6 +56,7 @@ const BlogContainer = ({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify(request),
       });
@@ -149,3 +150,4 @@ const BlogContainer = ({
 };
 
 export default BlogContainer;
+
