@@ -15,7 +15,7 @@
   --background-error: #e91c1c;
   --background-success: #057205;
   --transition-color: color 0.3s ease-in-out;
-  --transparent-navbar: #1111119b;
+  --transparent-navbar: #111111f8;
   --modal-content: #7f9cfbf2;
 
   /* Dark Mode */
@@ -45,8 +45,6 @@ html {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  background-color: var(--dark-background-color);
-  color: var(--dark-main-text-color);
 }
 
 nav {

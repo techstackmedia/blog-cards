@@ -27,7 +27,7 @@ const BookMark = () => {
   const storedEmail = localStorage.getItem('email');
 
   return (
-    <>
+    <div className={`layout ${isDark ? 'dark-layout' : ''}`}>
       <Navbar />
       <h1 className={`blog-title ${isDark ? 'dark-blog-title' : ''}`}>
         Bookmarked Blog Posts
@@ -77,7 +77,7 @@ const BookMark = () => {
           <Footer />
         </>
       ) : null}
-    </>
+    </div>
   );
 };
 
