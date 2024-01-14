@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Spinner from '../../components/shared/Spinner';
 import { defaultBlogValue } from '../defaultValues';
 import { BASE_URL } from '../../constants/BASE_URL';
@@ -19,7 +19,6 @@ const BlogProvider = ({ children }) => {
   const initialPageIndex = parseInt(searchParams.get('page')) || 1;
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [pageIndex, setPageIndex] = useState(initialPageIndex);
-
   useEffect(() => {
     void getAllRestaurants();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,6 +29,64 @@ const BlogProvider = ({ children }) => {
   useEffect(() => {
     void getAllBookmark();
   }, []);
+
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [isRegisterLoading, setIsRegisterLoading] = useState(false);
+  const [errorRegister, setErrorRegister] = useState(null);
+  const [JWT, setJWT] = useState(null);
+  const [user, setUser] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setIsRegisterLoading(true);
+      const response = await fetch(`${BASE_URL}/auth/local/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const json = await response.json();
+      if (response.ok) {
+        setJWT(json.jwt);
+        setUser(json.user)
+        localStorage.setItem('auth_token', json.jwt);
+      } else {
+        setErrorRegister(json.error.message);
+        setTimeout(() => {
+          setErrorRegister('');
+        }, 3000);
+      }
+    } catch {
+      setErrorRegister(e.message);
+    } finally {
+      setIsRegisterLoading(false);
+    }
+  };
+  console.log(user)
+
+  if (JWT) {
+    return <Navigate to='/' />;
+  }
+
+  const inputEmailUsenameError =
+    error === 'Email or Username are already taken' ? errorRegister : null;
+  const inputPasswordError =
+    error === 'password must be at least 6 characters' ? errorRegister : null;
 
   const authToken = localStorage.getItem('auth_token')
 
@@ -188,6 +245,14 @@ const BlogProvider = ({ children }) => {
         deleteBookmark,
         handleArticleNav,
         restaurants,
+        isRegisterLoading,
+        errorRegister,
+        handleChange,
+        handleSubmit,
+        inputPasswordError,
+        inputEmailUsenameError,
+        formData,
+        user,
         pageIndex,
       }}
     >
