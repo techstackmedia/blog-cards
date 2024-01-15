@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 100vh;
+  gap: 30px;
+}
+
+.formInput {
+  width: 357px;
+}
+
+.formError {
+  position: relative;
+}
+
+.errorForm {
+  position: relative;
+}
+
+.errorForm p {
+  position: absolute;
+  bottom: 25px;
+  color: var(--dark-background-error);
+  font-size: 14px;
+}

@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import Navbar from '../../../Navbar';
 import Footer from '../../../Footer';
 import { BlogContext } from '../../../../context/BlogContext';
+import { useTheme } from '../../../../hooks/useTheme';
+import './styles.css';
 
 const Register = () => {
   const {
@@ -13,107 +15,80 @@ const Register = () => {
     inputPasswordError,
     inputEmailUsenameError,
   } = useContext(BlogContext);
+  const { isDark } = useTheme();
 
   return (
-    <div>
+    <div className={`layout ${isDark ? 'dark-layout' : ''}`}>
       <Navbar />
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          marginTop: 100,
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          height: 'calc(100vh - 190px)',
-          gap: 25,
-        }}
-      >
+      <form onSubmit={handleSubmit} className='form'>
         <div>
           <input
+            className='formInput'
             type='text'
             placeholder='Your Username'
             name='username'
             value={formData.username}
             onChange={handleChange}
+            autoComplete='off'
             required
             style={{
-              width: '357px',
-              border: inputEmailUsenameError ? '1px solid red' : 'none',
+              border: inputEmailUsenameError
+                ? '1px solid var(--dark-background-error)'
+                : 'none',
             }}
           />
         </div>
         <div>
           <input
+            className='formInput'
             type='email'
             placeholder='Your Email'
             name='email'
             value={formData.email}
             onChange={handleChange}
+            autoComplete='off'
             required
             style={{
-              width: '357px',
-              border: inputEmailUsenameError ? '1px solid red' : 'none',
+              border: inputEmailUsenameError
+                ? '1px solid var(--dark-background-error)'
+                : 'none',
             }}
           />
         </div>
         <div>
           <input
+            className='formInput'
             type='password'
             placeholder='Your Password'
             name='password'
             value={formData.password}
             onChange={handleChange}
+            autoComplete='off'
             required
             style={{
-              width: '357px',
-              border: inputPasswordError ? '1px solid red' : 'none',
+              border: inputPasswordError
+                ? '1px solid var(--dark-background-error)'
+                : 'none',
             }}
           />
         </div>
-        <div style={{ position: 'relative' }}>
+        <div className='errorForm'>
           {inputEmailUsenameError || inputPasswordError ? (
             <>
-              <p
-                style={{
-                  position: 'absolute',
-                  top: -35,
-                  color: 'red',
-                  fontSize: 14,
-                }}
-              >
-                {inputEmailUsenameError}
-              </p>
-              <p
-                style={{
-                  position: 'absolute',
-                  top: -35,
-                  color: 'red',
-                  fontSize: 14,
-                }}
-              >
-                {inputPasswordError}
-              </p>
+              <p>{inputEmailUsenameError}</p>
+              <p>{inputPasswordError}</p>
             </>
           ) : (
-            <p
-              style={{
-                position: 'absolute',
-                top: -35,
-                color: 'red',
-                fontSize: 14,
-              }}
-            >
-              {errorRegister}
-            </p>
+            <p>{errorRegister}</p>
           )}
-          <button type='submit' style={{ width: 357 }}>
+          <button className='formInput' type='submit'>
             {isRegisterLoading ? 'Loading' : 'Submit'}
           </button>
         </div>
       </form>
-      <Footer />
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -40,33 +40,6 @@ const Search = () => {
     search();
   }, [query]);
 
-  // useEffect(() => {
-  //   void search()
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [query])
-
-  // const search = async () => {
-  //   try {
-  //     const response = await fetch(`${process.env.REACT_APP_HOST}/indexes/restaurant/search?q=${query}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${process.env.REACT_APP_MEILISEARCH_KEY}`,
-  //     },
-  //   });
-  //   if (!response.ok) {
-  //     throw new Error('Unable to make search request at the moment! Please try again later.')
-  //   } else {
-  //     const json = await response.json();
-  //     setResults(json.hits)
-  //   }
-  //   } catch (e) {
-  //     setError(e.message)
-  //   }
-  // }
-
-  // console.log(results)
-
   const handleCloseModal = useCallback(() => {
     setShowModal(false);
   }, []);

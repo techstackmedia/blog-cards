@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Spinner from '../../components/shared/Spinner';
 import { defaultBlogValue } from '../defaultValues';
 import { BASE_URL } from '../../constants/BASE_URL';
@@ -68,25 +68,27 @@ const BlogProvider = ({ children }) => {
       } else {
         setErrorRegister(json.error.message);
         setTimeout(() => {
-          setErrorRegister('');
+          setErrorRegister(null);
         }, 3000);
       }
     } catch {
       setErrorRegister(e.message);
+      setTimeout(() => {
+        setErrorRegister(null);
+      }, 3000);
     } finally {
       setIsRegisterLoading(false);
     }
   };
-  console.log(user)
 
   if (JWT) {
-    return <Navigate to='/' />;
+    navigate('/');
   }
 
   const inputEmailUsenameError =
-    error === 'Email or Username are already taken' ? errorRegister : null;
+    errorRegister === 'Email or Username are already taken' ? errorRegister : null;
   const inputPasswordError =
-    error === 'password must be at least 6 characters' ? errorRegister : null;
+    errorRegister === 'password must be at least 6 characters' ? errorRegister : null;
 
   const authToken = localStorage.getItem('auth_token')
 
