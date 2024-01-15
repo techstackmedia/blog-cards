@@ -20,9 +20,14 @@
   position: relative;
 }
 
-.errorForm p {
+.errorForm p:nth-child(1),
+.error_auth {
   position: absolute;
-  bottom: 25px;
+  bottom: 70px;
   color: var(--dark-background-error);
   font-size: 14px;
+}
+
+.errorForm p {
+  margin: 0;
 }

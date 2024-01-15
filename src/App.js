@@ -6,6 +6,7 @@ import { BlogDetailProvider } from './context/BlogDetailContext';
 import { ThemeProvider } from './context/ThemeContext';
 import RegisterPage from './pages/Register';
 import Bookmark from './pages/Bookmark';
+import LoginPage from './pages/Login';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
               <Route path='/bookmark' element={<Bookmark />}></Route>
               <Route path='/contact' element={<Home />}></Route>
               <Route path='/:id' element={<Detail />}></Route>
-              <Route path='/register' element={<RegisterPage />}></Route>
+              <Route path='/auth/register' element={<RegisterPage />}></Route>
+              <Route path='/auth/login' element={<LoginPage />}></Route>
             </Routes>
           </BlogDetailProvider>
         </BlogProvider>

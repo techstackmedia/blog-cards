@@ -72,9 +72,9 @@ const Navbar = () => {
               className={`navlink ${pathname === '/contact' ? 'active' : ''} ${
                 isDark ? 'dark-active' : ''
               }`}
-              to='/register'
+              to='/auth/login'
             >
-              {authToken && pathname !== '/register' ? 'Sign Out' : 'Register'}
+              {authToken && pathname !== '/auth/login' ? 'Sign Out' : 'Login'}
             </Link>
             <button
               onClick={toggleDarkMode}
