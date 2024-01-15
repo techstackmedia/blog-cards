@@ -1,8 +1,5 @@
 import { useContext } from 'react';
-import Navbar from '../../../Navbar';
-import Footer from '../../../Footer';
 import { BlogContext } from '../../../../context/BlogContext';
-import { useTheme } from '../../../../hooks/useTheme';
 import './styles.css';
 
 const Register = () => {
@@ -15,11 +12,8 @@ const Register = () => {
     inputPasswordError,
     inputEmailUsenameError,
   } = useContext(BlogContext);
-  const { isDark } = useTheme();
 
   return (
-    <div className={`layout ${isDark ? 'dark-layout' : ''}`}>
-      <Navbar />
       <form onSubmit={handleSubmit} className='form'>
         <div>
           <input
@@ -81,15 +75,11 @@ const Register = () => {
           ) : (
             <p>{errorRegister}</p>
           )}
-          <button className='formInput' type='submit'>
+          <button className='formInput'  type='submit'>
             {isRegisterLoading ? 'Loading' : 'Submit'}
           </button>
         </div>
       </form>
-      <div>
-        <Footer />
-      </div>
-    </div>
   );
 };
 

@@ -4,8 +4,8 @@ import Detail from './pages/Detail';
 import { BlogProvider } from './context/BlogContext';
 import { BlogDetailProvider } from './context/BlogDetailContext';
 import { ThemeProvider } from './context/ThemeContext';
-import BookMark from './components/Blog/Bookmark';
-import Register from './components/Blog/Auth/Register';
+import RegisterPage from './pages/Register';
+import Bookmark from './pages/Bookmark';
 
 function App() {
   return (
@@ -15,11 +15,10 @@ function App() {
           <BlogDetailProvider>
             <Routes>
               <Route path='/' element={<Home />}></Route>
-              <Route path='/bookmark' element={<BookMark />}></Route>
+              <Route path='/bookmark' element={<Bookmark />}></Route>
               <Route path='/contact' element={<Home />}></Route>
               <Route path='/:id' element={<Detail />}></Route>
-              <Route path='/bookmark' element={<BookMark />}></Route>
-              <Route path='/register' element={<Register />}></Route>
+              <Route path='/register' element={<RegisterPage />}></Route>
             </Routes>
           </BlogDetailProvider>
         </BlogProvider>
