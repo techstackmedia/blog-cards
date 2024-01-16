@@ -9,7 +9,7 @@ const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [prevScrollPosition, setPrevScrollPosition] = useState(0);
   const { authToken } = useContext(BlogContext);
-  const userId = localStorage.getItem('user_id')
+  const userId = localStorage.getItem('user_id');
 
   const handleScroll = () => {
     setPrevScrollPosition(scrollPosition);
@@ -73,14 +73,21 @@ const Navbar = () => {
               className={`navlink ${pathname === '/contact' ? 'active' : ''} ${
                 isDark ? 'dark-active' : ''
               }`}
-              to='/auth/login'
+              to={pathname === '/auth/login' ? `/auth/register` : '/auth/login'}
             >
-              {authToken && pathname !== '/auth/login' ? 'Sign Out' : 'Login'}
+              {authToken && pathname !== '/auth/login'
+                ? pathname === '/auth/register'
+                  ? 'Login'
+                  : 'Sign Out'
+                : pathname === '/auth/login'
+                ? 'Register'
+                : 'Login'}
             </Link>
             <button
               onClick={toggleDarkMode}
               style={{
                 backgroundColor: isDark ? '#ffffffde' : '#1111119b',
+                // backgroundColor: isDark ? 'var(--color-transparent-button-disable)' : 'var(--transparent-navbar)',
                 border: isDark ? '1px solid #fff' : '1px solid #333',
                 color: isDark ? '#000' : '#fff',
               }}

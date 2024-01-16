@@ -15,8 +15,7 @@ const BlogContainer = ({
   handleArticleNav,
   cardDescription,
 }) => {
-  const { restaurants, deleteBookmark, authToken } =
-    useContext(BlogContext);
+  const { restaurants, deleteBookmark, authToken } = useContext(BlogContext);
   useEffect(() => {
     const wordsPerMinute = 225;
     const wordCount = countWords(cardDescription);
@@ -82,7 +81,7 @@ const BlogContainer = ({
 
   if (isLoading) {
     return <Spinner />;
-  } 
+  }
   if (success) {
     return <p>{success}</p>;
   }
@@ -105,7 +104,9 @@ const BlogContainer = ({
           justifyContent: 'space-around',
         }}
       >
-        {pathname === '/bookmark' ? 'Delete' : 'Save'}
+        <span style={{ color: isDark ? 'var(--color-white)' : 'var(--color-black)' }}>
+          {pathname.includes('/bookmark') ? 'Delete' : 'Save'}
+        </span>
       </div>
       <div
         className={`blog-card-image ${
@@ -150,4 +151,3 @@ const BlogContainer = ({
 };
 
 export default BlogContainer;
-
