@@ -28,6 +28,7 @@ const BlogProvider = ({ children }) => {
 
   useEffect(() => {
     void getAllBookmark();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [formRegisterData, setFormRegisterData] = useState({
@@ -176,6 +177,7 @@ const BlogProvider = ({ children }) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
         },
       });
       if (!response.ok) {

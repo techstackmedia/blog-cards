@@ -61,14 +61,14 @@ const Navbar = () => {
             className='divlink'
             style={{ position: 'relative', top: 2, zIndex: -1 }}
           >
-            <Link
+            <a
               className={`navlink ${pathname === '/about' ? 'active' : ''} ${
                 isDark ? 'dark-active' : ''
               }`}
-              to={`/bookmark/${userId}`}
+              href={`/bookmark/${userId}`}
             >
               Bookmark
-            </Link>
+            </a>
             <Link
               className={`navlink ${pathname === '/contact' ? 'active' : ''} ${
                 isDark ? 'dark-active' : ''
