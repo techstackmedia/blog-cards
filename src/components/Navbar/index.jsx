@@ -9,6 +9,7 @@ const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [prevScrollPosition, setPrevScrollPosition] = useState(0);
   const { authToken } = useContext(BlogContext);
+  const userId = localStorage.getItem('user_id')
 
   const handleScroll = () => {
     setPrevScrollPosition(scrollPosition);
@@ -64,7 +65,7 @@ const Navbar = () => {
               className={`navlink ${pathname === '/about' ? 'active' : ''} ${
                 isDark ? 'dark-active' : ''
               }`}
-              to='/bookmark'
+              to={`/bookmark/${userId}`}
             >
               Bookmark
             </Link>

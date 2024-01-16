@@ -65,6 +65,9 @@ const BlogProvider = ({ children }) => {
         setJWTRegister(json.jwt);
         setUserRegister(json.user);
         localStorage.setItem('auth_token', json.jwt);
+        localStorage.setItem('user_id', json.user.id);
+        localStorage.setItem('user_email', json.user.email);
+        localStorage.setItem('user_name', json.user.username);
       } else {
         setErrorRegister(json.error.message);
         setTimeout(() => {
@@ -130,6 +133,9 @@ const BlogProvider = ({ children }) => {
         setJWTLogin(json.jwt);
         setUserLogin(json.user);
         localStorage.setItem('auth_token', json.jwt);
+        localStorage.setItem('user_id', json.user.id);
+        localStorage.setItem('user_email', json.user.email);
+        localStorage.setItem('user_name', json.user.username);
       } else {
         setErrorLogin(json.error.message);
         setTimeout(() => {

@@ -16,7 +16,7 @@ function App() {
           <BlogDetailProvider>
             <Routes>
               <Route path='/' element={<Home />}></Route>
-              <Route path='/bookmark' element={<Bookmark />}></Route>
+              <Route path='/bookmark/:id' element={<Bookmark />}></Route>
               <Route path='/contact' element={<Home />}></Route>
               <Route path='/:id' element={<Detail />}></Route>
               <Route path='/auth/register' element={<RegisterPage />}></Route>
