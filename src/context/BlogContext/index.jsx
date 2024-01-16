@@ -68,6 +68,7 @@ const BlogProvider = ({ children }) => {
         localStorage.setItem('user_id', json.user.id);
         localStorage.setItem('user_email', json.user.email);
         localStorage.setItem('user_name', json.user.username);
+        // navigate('/');
       } else {
         setErrorRegister(json.error.message);
         setTimeout(() => {
@@ -88,7 +89,8 @@ const BlogProvider = ({ children }) => {
     if (JWTRegister) {
       navigate('/');
     }
-  }, [JWTRegister, navigate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JWTRegister]);
 
   const inputRegisterEmailUsenameError =
     errorRegister === 'Email or Username are already taken'
@@ -136,6 +138,7 @@ const BlogProvider = ({ children }) => {
         localStorage.setItem('user_id', json.user.id);
         localStorage.setItem('user_email', json.user.email);
         localStorage.setItem('user_name', json.user.username);
+        // navigate('/');
       } else {
         setErrorLogin(json.error.message);
         setTimeout(() => {
@@ -156,7 +159,8 @@ const BlogProvider = ({ children }) => {
     if (JWTLogin) {
       navigate('/');
     }
-  }, [JWTLogin, navigate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JWTLogin]);
 
   const inputLoginEmailUsenameError =
     errorLogin === 'identifier is a required field' ? errorLogin : null;
