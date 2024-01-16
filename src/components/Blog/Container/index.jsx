@@ -16,6 +16,7 @@ const BlogContainer = ({
   cardDescription,
 }) => {
   const { restaurants, deleteBookmark, authToken } = useContext(BlogContext);
+  const userId = localStorage.getItem('user_id');
   useEffect(() => {
     const wordsPerMinute = 225;
     const wordCount = countWords(cardDescription);
@@ -45,8 +46,8 @@ const BlogContainer = ({
     });
     const request = {
       data: {
-        Name: restaurant.attributes.Name,
-        Description: restaurant.attributes.Description,
+        Name: restaurant?.attributes.Name,
+        Description: restaurant?.attributes.Description,
       },
     };
     try {
@@ -90,7 +91,7 @@ const BlogContainer = ({
     <div className={`blog-card ${isDark ? 'dark-blog-card' : ''}`}>
       <div
         onClick={
-          pathname === '/bookmark'
+          pathname === `/bookmark/${userId}`
             ? () => deleteBookmark(item.id)
             : () => handleBookMark(item.id)
         }
