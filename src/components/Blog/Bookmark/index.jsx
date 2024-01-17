@@ -55,9 +55,45 @@ const BookMark = () => {
         {isDeleteLoading ? (
           <Spinner />
         ) : errorDelete ? (
-          errorDelete
+          <div
+            style={{
+              backgroundColor: 'var(--background-error)',
+              color: 'var(--color-white)',
+              width: 250,
+              marginInline: 'auto',
+              border: '1px solid var(--color-white)',
+              outline: '1px solid var(--background-error)',
+              borderRadius: 4,
+              textAlign: 'center',
+              paddingBlock: 20,
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            {errorDelete}
+          </div>
         ) : successDelete ? (
-          successDelete
+          <div
+            style={{
+              backgroundColor: 'var(--background-success)',
+              color: 'var(--color-white)',
+              width: 250,
+              marginInline: 'auto',
+              border: '1px solid var(--color-white)',
+              outline: '1px solid var(--background-success)',
+              borderRadius: 4,
+              textAlign: 'center',
+              paddingBlock: 20,
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            {successDelete}
+          </div>
         ) : null}
       </div>
       <BlogPagination
