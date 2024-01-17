@@ -30,6 +30,15 @@ const Navbar = () => {
   const showNav = shouldShowNavbar || scrollDirection === 'up';
   const { pathname } = useLocation();
 
+  const onClick = (e) => {
+    if (e.target.innerText === 'Sign Out') {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('user_name');
+      localStorage.removeItem('user_email');
+    }
+  };
+
   return (
     <>
       {showNav && (
@@ -69,20 +78,24 @@ const Navbar = () => {
             >
               Bookmark
             </a>
-            <Link
-              className={`navlink ${pathname === '/contact' ? 'active' : ''} ${
-                isDark ? 'dark-active' : ''
-              }`}
-              to={pathname === '/auth/login' ? `/auth/register` : '/auth/login'}
-            >
-              {authToken && pathname !== '/auth/login'
-                ? pathname === '/auth/register'
-                  ? 'Login'
-                  : 'Sign Out'
-                : pathname === '/auth/login'
-                ? 'Register'
-                : 'Login'}
-            </Link>
+            <div onClick={onClick} style={{ display: 'inline' }}>
+              <Link
+                className={`navlink ${
+                  pathname === '/contact' ? 'active' : ''
+                } ${isDark ? 'dark-active' : ''}`}
+                to={
+                  pathname === '/auth/login' ? `/auth/register` : '/auth/login'
+                }
+              >
+                {authToken && pathname !== '/auth/login'
+                  ? pathname === '/auth/register'
+                    ? 'Login'
+                    : 'Sign Out'
+                  : pathname === '/auth/login'
+                  ? 'Register'
+                  : 'Login'}
+              </Link>
+            </div>
             <button
               onClick={toggleDarkMode}
               style={{
