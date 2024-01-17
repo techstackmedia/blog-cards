@@ -31,7 +31,7 @@ const Register = () => {
           style={{
             border: inputRegisterEmailUsenameError
               ? '1px solid var(--dark-background-error)'
-              : 'none',
+              : '1px solid var(--color-button-disable)',
           }}
         />
       </div>
@@ -48,7 +48,7 @@ const Register = () => {
           style={{
             border: inputRegisterEmailUsenameError
               ? '1px solid var(--dark-background-error)'
-              : 'none',
+              : '1px solid var(--color-button-disable)',
           }}
         />
       </div>
@@ -65,7 +65,7 @@ const Register = () => {
           style={{
             border: inputRegisterPasswordError
               ? '1px solid var(--dark-background-error)'
-              : 'none',
+              : '1px solid var(--color-button-disable)',
           }}
         />
       </div>
@@ -81,7 +81,14 @@ const Register = () => {
         <p style={{ color: isDark ? '#fff' : '#000' }}>
           Already have an account? <Link to='/auth/login' style={{color: isDark ? 'var(--dark-color-link)' : 'var(--color-link)'}}>Login</Link>
         </p>
-        <button className='formInput' type='submit' style={{marginTop: 10}}>
+        <button
+          className={`formInput ${isDark ? 'dark-button' : 'button'}`}
+          type='submit'
+          style={{
+            marginTop: 10,
+            backgroundColor: !isDark ? 'var(--background-color)' : ''
+          }}
+        >
           {isRegisterLoading ? 'Loading' : 'Submit'}
         </button>
       </div>

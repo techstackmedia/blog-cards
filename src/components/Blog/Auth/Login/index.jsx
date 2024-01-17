@@ -27,11 +27,13 @@ const Login = () => {
           value={formLoginData?.identifier}
           onChange={handleLoginChange}
           autoComplete='off'
-           required
+          required
           style={{
             border: inputLoginEmailUsenameError
               ? '1px solid var(--dark-background-error)'
-              : 'none',
+              : isDark
+              ? '1px solid var(--color-white)'
+              : '1px solid var(--color-button-disable)',
           }}
         />
       </div>
@@ -48,7 +50,9 @@ const Login = () => {
           style={{
             border: inputLoginPasswordError
               ? '1px solid var(--dark-background-error)'
-              : 'none',
+              : isDark
+              ? '1px solid var(--color-white)'
+              : '1px solid var(--color-button-disable)',
           }}
         />
       </div>
@@ -61,7 +65,11 @@ const Login = () => {
         ) : (
           <p>{errorLogin}</p>
         )}
-        <p style={{ color: isDark ? 'var(--color-white)' : 'var(--color-black)' }}>
+        <p
+          style={{
+            color: isDark ? 'var(--color-white)' : 'var(--color-black)',
+          }}
+        >
           Don't have an account?{' '}
           <Link
             to='/auth/register'
@@ -73,7 +81,14 @@ const Login = () => {
           </Link>
         </p>
 
-        <button className='formInput' type='submit' style={{marginTop: 10}}>
+        <button
+          className={`formInput ${isDark ? 'dark-button' : 'button'}`}
+          type='submit'
+          style={{
+            marginTop: 10,
+            backgroundColor: !isDark ? 'var(--background-color)' : ''
+          }}
+        >
           {isLoginLoading ? 'Loading' : 'Submit'}
         </button>
       </div>
