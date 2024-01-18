@@ -6,6 +6,7 @@ import { useTheme } from '../../../hooks/useTheme';
 import { BASE_URL } from '../../../constants/BASE_URL';
 import Spinner from '../../shared/Spinner';
 import { BlogContext } from '../../../context/BlogContext';
+import { BlogBookmarkContext } from '../../../context/BlogBookmarkContext';
 // import Login from '../Auth/Login';
 
 const BlogContainer = ({
@@ -17,7 +18,8 @@ const BlogContainer = ({
   cardDescription,
   identity,
 }) => {
-  const { restaurants, deleteBookmark, authToken } = useContext(BlogContext);
+  const { restaurants, authToken } = useContext(BlogContext);
+  const {deleteBookmark} = useContext(BlogBookmarkContext)
   const userId = localStorage.getItem('user_id');
   useEffect(() => {
     const wordsPerMinute = 225;
