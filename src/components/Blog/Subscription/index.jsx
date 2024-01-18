@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BASE_URL } from '../../../constants/BASE_URL';
 import './styles.css';
 import { useTheme } from '../../../hooks/useTheme';
+import { BlogContext } from '../../../context/BlogContext';
+import { useLocation } from 'react-router-dom';
 
 const Subscription = () => {
   const { isDark } = useTheme();
+  const { bookMark } = useContext(BlogContext);
+  const { pathname } = useLocation();
+  console.log(pathname);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -92,7 +97,16 @@ const Subscription = () => {
   }
 
   return (
-    <div className='subscription-container'>
+    <div
+      className='subscription-container'
+      style={{
+        position:
+          bookMark?.data.length === 0 && pathname.includes('bookmark')
+            ? 'absolute'
+            : '',
+        bottom: bookMark?.data.length === 0 ? 0 : '',
+      }}
+    >
       <h2>Subscribe to Bello's Blog Newsletter</h2>
       <p>
         Receive insightful articles directly in your inbox. Don't miss out on

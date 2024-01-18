@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../../components/shared/Spinner';
 import { defaultBlogValue } from '../defaultValues';
 import { BASE_URL } from '../../constants/BASE_URL';
@@ -8,6 +8,7 @@ import { useTheme } from '../../hooks/useTheme';
 const BlogContext = createContext(defaultBlogValue);
 
 const BlogProvider = ({ children }) => {
+  const {pathname} = useLocation()
   const [restaurants, setRestaurants] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -173,7 +174,7 @@ const BlogProvider = ({ children }) => {
   const getAllBookmark = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${BASE_URL}/bookmarks`, {
+      const response = await fetch(`${BASE_URL}/bookmarks?pagination[page]=${pageIndex}&pagination[pageSize]=12`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -260,7 +261,7 @@ const BlogProvider = ({ children }) => {
     smoothScroll();
   };
 
-  const pageCount = restaurants?.meta?.pagination.pageCount;
+  const pageCount = pathname !== '/' ? bookMark?.meta?.pagination.pageCount : restaurants?.meta?.pagination.pageCount;
 
   const getAllRestaurants = async () => {
     try {
