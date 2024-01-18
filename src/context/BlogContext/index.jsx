@@ -8,7 +8,7 @@ import { useTheme } from '../../hooks/useTheme';
 const BlogContext = createContext(defaultBlogValue);
 
 const BlogProvider = ({ children }) => {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
   const [restaurants, setRestaurants] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -29,7 +29,7 @@ const BlogProvider = ({ children }) => {
 
   useEffect(() => {
     void getAllBookmark();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [formRegisterData, setFormRegisterData] = useState({
@@ -91,7 +91,7 @@ const BlogProvider = ({ children }) => {
     if (JWTRegister) {
       navigate('/');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JWTRegister]);
 
   const inputRegisterEmailUsenameError =
@@ -161,7 +161,7 @@ const BlogProvider = ({ children }) => {
     if (JWTLogin) {
       navigate('/');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JWTLogin]);
 
   const inputLoginEmailUsenameError =
@@ -174,13 +174,16 @@ const BlogProvider = ({ children }) => {
   const getAllBookmark = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${BASE_URL}/bookmarks?pagination[page]=${pageIndex}&pagination[pageSize]=12`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+      const response = await fetch(
+        `${BASE_URL}/bookmarks?pagination[page]=${pageIndex}&pagination[pageSize]=12`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error('Error in getting all bookmarked items!');
       } else {
@@ -261,7 +264,10 @@ const BlogProvider = ({ children }) => {
     smoothScroll();
   };
 
-  const pageCount = pathname !== '/' ? bookMark?.meta?.pagination.pageCount : restaurants?.meta?.pagination.pageCount;
+  const pageCount =
+    pathname !== '/'
+      ? bookMark?.meta?.pagination.pageCount
+      : restaurants?.meta?.pagination.pageCount;
 
   const getAllRestaurants = async () => {
     try {

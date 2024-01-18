@@ -23,7 +23,6 @@ const BookMark = () => {
   const { isDark } = useTheme();
 
   const storedEmail = localStorage.getItem('email');
-  console.log(bookMark);
 
   return (
     <>
@@ -51,6 +50,7 @@ const BookMark = () => {
         <div className='blogs'>
           <div className='blog-container'>
             {bookMark?.data.map((item) => {
+              const identity = item.attributes.identity
               const cardTitle = item.attributes.Name;
               const dateString = item.attributes.publishedAt;
               const formattedDate = dateFormatter(dateString);
@@ -61,6 +61,7 @@ const BookMark = () => {
               return (
                 <BlogContainer
                   key={item.id}
+                  identity={identity}
                   handleArticleNav={handleArticleNav}
                   item={item}
                   cardTitle={cardTitle}

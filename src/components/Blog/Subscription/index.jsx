@@ -9,7 +9,6 @@ const Subscription = () => {
   const { isDark } = useTheme();
   const { bookMark } = useContext(BlogContext);
   const { pathname } = useLocation();
-  console.log(pathname);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [successMsg, setSuccessMsg] = useState('');

@@ -15,6 +15,7 @@ const BlogContainer = ({
   formattedDate,
   handleArticleNav,
   cardDescription,
+  identity,
 }) => {
   const { restaurants, deleteBookmark, authToken } = useContext(BlogContext);
   const userId = localStorage.getItem('user_id');
@@ -41,6 +42,7 @@ const BlogContainer = ({
     });
     const request = {
       data: {
+        identity: id,
         Name: restaurant?.attributes.Name,
         Description: restaurant?.attributes.Description,
       },
@@ -174,7 +176,7 @@ const BlogContainer = ({
         className={`blog-card-image ${
           isDark ? 'blog-card-image' : 'dark-blog-card-image'
         }`}
-        onClick={() => handleArticleNav(`/${item.id}`)}
+        onClick={() => handleArticleNav(pathname === '/' ? `/${item.id}` : `/${identity}`)}
       >
         <h1 className={`blog-card-title ${isDark ? 'dark-blog-title' : ''}`}>
           {cardTitle}
