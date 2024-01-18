@@ -32,12 +32,6 @@ const BlogContainer = ({
   const [success, setSuccess] = useState(null);
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    return () => {
-      setSuccess(null);
-    };
-  }, []);
-
   const restaurantList = restaurants.data;
 
   const handleBookMark = async (id) => {
@@ -65,6 +59,10 @@ const BlogContainer = ({
       } else {
         const json = await response.json();
         setBookMark(json);
+        setSuccess('Item successfully added to bookmark page!');
+        setTimeout(() => {
+          setSuccess(null);
+        }, 3000);
       }
     } catch (e) {
       setError(e.message);
@@ -77,14 +75,72 @@ const BlogContainer = ({
   };
 
   if (error) {
-    return <p>{error}</p>;
+    return (
+      <div
+        style={{
+          backgroundColor: 'var(--background-error)',
+          color: 'var(--color-white)',
+          width: 370,
+          marginInline: 'auto',
+          border: '1px solid var(--color-white)',
+          outline: '1px solid var(--background-error)',
+          borderRadius: 4,
+          textAlign: 'center',
+          paddingBlock: 20,
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 10,
+        }}
+      >
+        {authToken !== null ? (
+          error
+        ) : (
+          <>
+            <span>Please</span>{' '}
+            <Link
+              to='/auth/login'
+              style={{
+                color: 'var(--color-white)',
+                textDecoration: 'underline',
+              }}
+            >
+              Login
+            </Link>{' '}
+            <span>to bookmark item to bookmark page!</span>
+          </>
+        )}
+      </div>
+    );
   }
 
   if (isLoading) {
     return <Spinner />;
   }
   if (success) {
-    return <p>{success}</p>;
+    return (
+      <div
+        style={{
+          backgroundColor: 'var(--background-success)',
+          color: 'var(--color-white)',
+          width: 370,
+          marginInline: 'auto',
+          border: '1px solid var(--color-white)',
+          outline: '1px solid var(--background-success)',
+          borderRadius: 4,
+          textAlign: 'center',
+          paddingBlock: 20,
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 10,
+        }}
+      >
+        {success}
+      </div>
+    );
   }
 
   return (
@@ -105,7 +161,11 @@ const BlogContainer = ({
           justifyContent: 'space-around',
         }}
       >
-        <span style={{ color: isDark ? 'var(--color-white)' : 'var(--color-black)' }}>
+        <span
+          style={{
+            color: isDark ? 'var(--color-white)' : 'var(--color-black)',
+          }}
+        >
           {pathname.includes('/bookmark') ? 'Delete' : 'Save'}
         </span>
       </div>
