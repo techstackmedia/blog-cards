@@ -9,6 +9,7 @@ import Bookmark from './pages/Bookmark';
 import LoginPage from './pages/Login';
 import PrivateRoutes from './routes/PrivateRoutes';
 import { BlogAuthProvider } from './context/BlogAuthContext';
+import { BlogBookmarkProvider } from './context/BlogBookmarkContext';
 
 function App() {
   return (
@@ -16,18 +17,23 @@ function App() {
       <ThemeProvider>
         <BlogAuthProvider>
           <BlogProvider>
-            <BlogDetailProvider>
-              <Routes>
-                <Route path='/' element={<Home />}></Route>
-                <Route element={<PrivateRoutes />}>
-                  <Route path='/bookmark/:id' element={<Bookmark />}></Route>
-                </Route>
-                <Route path='/contact' element={<Home />}></Route>
-                <Route path='/:id' element={<Detail />}></Route>
-                <Route path='/auth/register' element={<RegisterPage />}></Route>
-                <Route path='/auth/login' element={<LoginPage />}></Route>
-              </Routes>
-            </BlogDetailProvider>
+            <BlogBookmarkProvider>
+              <BlogDetailProvider>
+                <Routes>
+                  <Route path='/' element={<Home />}></Route>
+                  <Route element={<PrivateRoutes />}>
+                    <Route path='/bookmark/:id' element={<Bookmark />}></Route>
+                  </Route>
+                  <Route path='/contact' element={<Home />}></Route>
+                  <Route path='/:id' element={<Detail />}></Route>
+                  <Route
+                    path='/auth/register'
+                    element={<RegisterPage />}
+                  ></Route>
+                  <Route path='/auth/login' element={<LoginPage />}></Route>
+                </Routes>
+              </BlogDetailProvider>
+            </BlogBookmarkProvider>
           </BlogProvider>
         </BlogAuthProvider>
       </ThemeProvider>

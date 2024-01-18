@@ -14,83 +14,16 @@ const BlogProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const { isDark } = useTheme();
-  const [bookMark, setBookMark] = useState(null);
-  const [errorDelete, setErrorDelete] = useState(null);
-  const [successDelete, setSuccessDelete] = useState(null);
   const searchParams = new URLSearchParams(window.location.search);
   const initialPageIndex = parseInt(searchParams.get('page')) || 1;
-  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [pageIndex, setPageIndex] = useState(initialPageIndex);
   const { authToken } = useContext(BlogAuthContext);
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     void getAllRestaurants();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex]);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    void getAllBookmark();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const getAllBookmark = async () => {
-    try {
-      setIsDeleteLoading(true);
-      const response = await fetch(
-        `${BASE_URL}/bookmarks?pagination[page]=${pageIndex}&pagination[pageSize]=12`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error('Error in getting all bookmarked items!');
-      } else {
-        const json = await response.json();
-        setBookMark(json);
-      }
-    } catch (e) {
-      setErrorDelete(e.message);
-      setTimeout(() => {
-        setErrorDelete(null);
-      }, 3000);
-    } finally {
-      setIsDeleteLoading(false);
-    }
-  };
-
-  const deleteBookmark = async (id) => {
-    try {
-      const response = await fetch(`${BASE_URL}/bookmarks/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error('Error in deleting item.');
-      } else {
-        setBookMark((prevBookMark) => ({
-          ...prevBookMark,
-          data: prevBookMark.data.filter((item) => item.id !== id),
-        }));
-        setSuccessDelete('Item successfully deleted!');
-        setTimeout(() => {
-          setSuccessDelete('');
-        }, 3000);
-      }
-    } catch (e) {
-      setErrorDelete(e.message);
-      setTimeout(() => {
-        setErrorDelete('');
-      }, 3000);
-    }
-  };
 
   if (error) {
     return <p>{error}</p>;
@@ -129,9 +62,8 @@ const BlogProvider = ({ children }) => {
   };
 
   const pageCount =
-    pathname !== '/'
-      ? bookMark?.meta?.pagination.pageCount
-      : restaurants?.meta?.pagination.pageCount;
+    pathname === '/'
+      ?  restaurants?.meta?.pagination.pageCount : null;
 
   const getAllRestaurants = async () => {
     try {
@@ -188,13 +120,8 @@ const BlogProvider = ({ children }) => {
       value={{
         prevPage,
         nextPage,
-        bookMark,
-        errorDelete,
-        successDelete,
-        isDeleteLoading,
         authToken,
         pageCount,
-        deleteBookmark,
         handleArticleNav,
         restaurants,
         pageIndex,

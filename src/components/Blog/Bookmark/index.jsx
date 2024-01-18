@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { BlogContext } from '../../../context/BlogContext';
 import { useTheme } from '../../../hooks/useTheme';
 import { dateFormatter } from '../../../utils/Formatter';
 import { contentTruncate } from '../../../utils/Content';
@@ -7,6 +6,7 @@ import BlogContainer from '../Container';
 import BlogPagination from '../Pagination/PrevNext';
 import Subscription from '../Subscription';
 import Spinner from '../../shared/Spinner';
+import { BlogBookmarkContext } from '../../../context/BlogBookmarkContext';
 
 const BookMark = () => {
   const {
@@ -19,7 +19,7 @@ const BookMark = () => {
     errorDelete,
     successDelete,
     isDeleteLoading,
-  } = useContext(BlogContext);
+  } = useContext(BlogBookmarkContext);
   const { isDark } = useTheme();
 
   const storedEmail = localStorage.getItem('email');
