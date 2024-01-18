@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { BlogContext } from '../../../../context/BlogContext';
 import '../styles.css';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../../../hooks/useTheme';
+import { BlogAuthContext } from '../../../../context/BlogAuthContext';
 
 const Register = () => {
   const {
@@ -13,7 +13,7 @@ const Register = () => {
     handleRegisterSubmit,
     inputRegisterPasswordError,
     inputRegisterEmailUsenameError,
-  } = useContext(BlogContext);
+  } = useContext(BlogAuthContext);
   const { isDark } = useTheme();
 
   return (
@@ -24,7 +24,7 @@ const Register = () => {
           type='text'
           placeholder='Your Username'
           name='username'
-          value={formRegisterData.username}
+          value={formRegisterData?.username}
           onChange={handleRegisterChange}
           autoComplete='off'
           required
@@ -41,7 +41,7 @@ const Register = () => {
           type='email'
           placeholder='Your Email'
           name='email'
-          value={formRegisterData.email}
+          value={formRegisterData?.email}
           onChange={handleRegisterChange}
           autoComplete='off'
           required
@@ -58,7 +58,7 @@ const Register = () => {
           type='password'
           placeholder='Your Password'
           name='password'
-          value={formRegisterData.password}
+          value={formRegisterData?.password}
           onChange={handleRegisterChange}
           autoComplete='off'
           required

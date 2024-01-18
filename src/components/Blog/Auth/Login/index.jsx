@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { BlogContext } from '../../../../context/BlogContext';
 import '../styles.css';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../../../hooks/useTheme';
+import { BlogAuthContext } from '../../../../context/BlogAuthContext';
 
 const Login = () => {
   const {
@@ -13,7 +13,7 @@ const Login = () => {
     handleLoginSubmit,
     inputLoginPasswordError,
     inputLoginEmailUsenameError,
-  } = useContext(BlogContext);
+  } = useContext(BlogAuthContext);
   const { isDark } = useTheme();
 
   return (
