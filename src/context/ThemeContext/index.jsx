@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
+import { defaultThemeValue } from '../defaultValues';
 
-const ThemeContext = createContext();
+const ThemeContext = createContext(defaultThemeValue);
 const ThemeProvider = ({ children }) => {
   const storedTheme = localStorage.getItem('theme') || 'light';
   const [currentTheme, setCurrentTheme] = useState(storedTheme);

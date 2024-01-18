@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from 'react';
 import { BASE_URL } from '../../constants/BASE_URL';
 import { useNavigate } from 'react-router-dom';
+import { defaultAuthContext } from '../defaultValues';
 
-const BlogAuthContext = createContext();
+const BlogAuthContext = createContext(defaultAuthContext);
 const BlogAuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [formRegisterData, setFormRegisterData] = useState({

@@ -2,8 +2,9 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BlogAuthContext } from '../BlogAuthContext';
 import { BASE_URL } from '../../constants/BASE_URL';
+import { defaultBlogBookmarkValue } from '../defaultValues';
 
-const BlogBookmarkContext = createContext();
+const BlogBookmarkContext = createContext(defaultBlogBookmarkValue);
 const BlogBookmarkProvider = ({ children }) => {
   const [bookMark, setBookMark] = useState(null);
   const [errorDelete, setErrorDelete] = useState(null);
