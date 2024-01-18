@@ -211,7 +211,7 @@ const BlogProvider = ({ children }) => {
           ...prevBookMark,
           data: prevBookMark.data.filter((item) => item.id !== id),
         }));
-        setSuccessDelete('Item successfully deleted');
+        setSuccessDelete('Item successfully deleted!');
         setTimeout(() => {
           setSuccessDelete('');
         }, 3000);
