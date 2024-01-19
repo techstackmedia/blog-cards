@@ -3,6 +3,7 @@ import '../styles.css';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../../../hooks/useTheme';
 import { BlogAuthContext } from '../../../../context/BlogAuthContext';
+import Button from '../../Button';
 
 const Register = () => {
   const {
@@ -79,18 +80,26 @@ const Register = () => {
           <p>{errorRegister}</p>
         )}
         <p style={{ color: isDark ? '#fff' : '#000' }}>
-          Already have an account? <Link to='/auth/login' style={{color: isDark ? 'var(--dark-color-link)' : 'var(--color-link)'}}>Login</Link>
+          Already have an account?{' '}
+          <Link
+            to='/auth/login'
+            style={{
+              color: isDark ? 'var(--dark-color-link)' : 'var(--color-link)',
+            }}
+          >
+            Login
+          </Link>
         </p>
-        <button
+        <Button
+          isDisabled={isRegisterLoading ? true : false}
           className={`formInput ${isDark ? 'dark-button' : 'button'}`}
-          type='submit'
-          style={{
+          sx={{
             marginTop: 10,
-            backgroundColor: !isDark ? 'var(--background-color)' : ''
+            backgroundColor: !isDark ? 'var(--background-color)' : '',
           }}
         >
           {isRegisterLoading ? 'Loading' : 'Submit'}
-        </button>
+        </Button>
       </div>
     </form>
   );

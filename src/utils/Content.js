@@ -16,8 +16,8 @@ const contentTruncate = (descriptions) => {
         .join(' ')
         .split(' ');
     const truncatedWords =
-        textArray?.length > 30
-            ? `${textArray.splice(0, 30).join(' ')}...`
+        textArray?.length > 50
+            ? `${textArray.splice(0, 40).join(' ')}...`
             : `${textArray?.join(' ')}`;
 
     const content = textArray?.join(' ');

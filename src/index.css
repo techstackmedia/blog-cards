@@ -311,7 +311,7 @@ input.dark-search-input {
     width: 100%;
   }
   .blog-container {
-    width: 100%;
+    width: 70%;
   }
 }
 
@@ -340,7 +340,7 @@ input.dark-search-input {
   }
 }
 
-@media (min-width: 991px) {
+/* @media (min-width: 991px) {
   .blog-detail {
     width: 80%;
   }
@@ -385,4 +385,4 @@ input.dark-search-input {
     width: 30%;
     height: 350px;
   }
-}
+} */

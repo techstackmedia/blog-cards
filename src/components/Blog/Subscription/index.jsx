@@ -4,6 +4,7 @@ import './styles.css';
 import { useTheme } from '../../../hooks/useTheme';
 import { BlogContext } from '../../../context/BlogContext';
 import { useLocation } from 'react-router-dom';
+import Button from '../Button';
 
 const Subscription = () => {
   const { isDark } = useTheme();
@@ -138,14 +139,14 @@ const Subscription = () => {
           spellCheck={false}
         />
 
-        <button
+        <Button
+          isDisabled={isLoading ? true : false}
           className={`subscription-button ${
             isDark ? 'dark-subscription-button' : ''
           }`}
-          type='submit'
         >
           Subscribe
-        </button>
+        </Button>
       </form>
     </div>
   );

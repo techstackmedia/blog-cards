@@ -60,7 +60,7 @@ const BlogContainer = ({
         body: JSON.stringify(request),
       });
       if (!response.ok) {
-        throw new Error('Error in adding item to bookmark page!');
+        throw new Error('Item already exist in bookmark page!');
       } else {
         const json = await response.json();
         setBookMark(json);
