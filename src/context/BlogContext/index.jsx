@@ -62,8 +62,7 @@ const BlogProvider = ({ children }) => {
   };
 
   const pageCount =
-    pathname === '/'
-      ?  restaurants?.meta?.pagination.pageCount : null;
+    pathname === '/' ? restaurants?.meta?.pagination.pageCount : null;
 
   const getAllRestaurants = async () => {
     try {
@@ -91,7 +90,11 @@ const BlogProvider = ({ children }) => {
   };
 
   if (error) {
-    return <p className='blogs-status'>{error}</p>;
+    return (
+      <p className='blogs-status'>
+        <span>{error}</span>
+      </p>
+    );
   }
 
   if (isLoading) {

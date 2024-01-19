@@ -274,6 +274,12 @@ input.dark-search-input {
   content: url(https://img.icons8.com/ffffff/metro/20/link.png);
 }
 
+.blogs-status {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
 @media (min-width: 0) {
   .blog-card {
     width: 100%;
