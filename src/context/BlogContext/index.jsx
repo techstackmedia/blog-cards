@@ -1,37 +1,25 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../../components/shared/Spinner';
 import { defaultBlogValue } from '../defaultValues';
 import { BASE_URL } from '../../constants/BASE_URL';
 import { useTheme } from '../../hooks/useTheme';
 import { BlogAuthContext } from '../BlogAuthContext';
+import useFetch from '../../hooks/useFetch';
 
 const BlogContext = createContext(defaultBlogValue);
 
 const BlogProvider = ({ children }) => {
+  const {isLoading, error, restaurants, setPageIndex, pageIndex} = useFetch(`${BASE_URL}/restaurants`,         {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }, 'Error in fetching all restaurants')
   const { pathname } = useLocation();
-  const [restaurants, setRestaurants] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { isDark } = useTheme();
-  const searchParams = new URLSearchParams(window.location.search);
-  const initialPageIndex = parseInt(searchParams.get('page')) || 1;
-  const [pageIndex, setPageIndex] = useState(initialPageIndex);
   const { authToken } = useContext(BlogAuthContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    void getAllRestaurants();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageIndex]);
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   const smoothScroll = () => {
     window.scrollTo({
@@ -63,31 +51,6 @@ const BlogProvider = ({ children }) => {
 
   const pageCount =
     pathname === '/' ? restaurants?.meta?.pagination.pageCount : null;
-
-  const getAllRestaurants = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const response = await fetch(
-        `${BASE_URL}/restaurants?pagination[page]=${pageIndex}&pagination[pageSize]=12`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error('Error in fetching all restaurants');
-      }
-      const json = await response.json();
-      setRestaurants(json);
-    } catch (e) {
-      setError(e.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   if (error) {
     return (

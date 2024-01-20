@@ -51,7 +51,7 @@ const BlogAuthProvider = ({ children }) => {
           setErrorRegister(null);
         }, 3000);
       }
-    } catch {
+    } catch (e) {
       setErrorRegister(e.message);
       setTimeout(() => {
         setErrorRegister(null);
