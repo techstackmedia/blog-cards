@@ -57,7 +57,7 @@ const BlogBookmarkProvider = ({ children }) => {
 
   const getAllBookmark = async () => {
     try {
-      setIsDeleteLoading(true);
+      setIsLoadingBookmark(true);
       const response = await fetch(
         `${BASE_URL}/bookmarks?pagination[page]=${pageIndex}&pagination[pageSize]=12`,
         {
