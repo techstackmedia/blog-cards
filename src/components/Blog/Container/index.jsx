@@ -18,7 +18,6 @@ const BlogContainer = ({
   cardDescription,
   identity,
 }) => {
-  console.log(truncatedWords)
   const { restaurants, authToken } = useContext(BlogContext);
   const {deleteBookmark} = useContext(BlogBookmarkContext)
   const userId = localStorage.getItem('user_id');
