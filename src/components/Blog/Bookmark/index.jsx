@@ -15,6 +15,8 @@ const BookMark = () => {
     pageCount,
     handleArticleNav,
     pageIndex,
+    errorBookmark,
+    isLoadingBookmark,
     bookMark,
     errorDelete,
     successDelete,
@@ -23,6 +25,14 @@ const BookMark = () => {
   const { isDark } = useTheme();
 
   const storedEmail = localStorage.getItem('email');
+
+  if (errorBookmark) {
+    return <p>Failed to bookmark post. Try again!</p>
+  }
+
+  if (isLoadingBookmark) {
+    return <Spinner />
+  }
 
   return (
     <>

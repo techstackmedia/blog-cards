@@ -8,10 +8,12 @@ const BlogBookmarkContext = createContext(defaultBlogBookmarkValue);
 const BlogBookmarkProvider = ({ children }) => {
   const [bookMark, setBookMark] = useState(null);
   const [errorDelete, setErrorDelete] = useState(null);
+  const [errorBookmark, setErrorBookmark] = useState(null);
   const [successDelete, setSuccessDelete] = useState(null);
   const searchParams = new URLSearchParams(window.location.search);
   const initialPageIndex = parseInt(searchParams.get('page')) || 1;
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  const [isLoadingBookmark, setIsLoadingBookmark] = useState(false);
   const [pageIndex, setPageIndex] = useState(initialPageIndex);
   const { authToken } = useContext(BlogAuthContext);
   const { pathname } = useLocation();
@@ -73,12 +75,12 @@ const BlogBookmarkProvider = ({ children }) => {
         setBookMark(json);
       }
     } catch (e) {
-      setErrorDelete(e.message);
+      setErrorBookmark(e.message);
       setTimeout(() => {
-        setErrorDelete(null);
+        setErrorBookmark(null);
       }, 3000);
     } finally {
-      setIsDeleteLoading(false);
+      setIsLoadingBookmark(false);
     }
   };
 
@@ -107,7 +109,7 @@ const BlogBookmarkProvider = ({ children }) => {
       setTimeout(() => {
         setErrorDelete('');
       }, 3000);
-    }
+    } 
   };
   return (
     <BlogBookmarkContext.Provider
@@ -120,6 +122,8 @@ const BlogBookmarkProvider = ({ children }) => {
         nextPage,
         handleArticleNav,
         deleteBookmark,
+        isLoadingBookmark,
+        errorBookmark,
         pageCount,
         pageIndex,
       }}
