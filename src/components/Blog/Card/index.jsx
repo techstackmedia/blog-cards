@@ -48,7 +48,7 @@ function BlogCard() {
                 handleDeleteClick={() => handleDeleteClick(item.id)}
                 item={item}
                 cardTitle={cardTitle}
-                cardDescription={content}
+                cardDescription={(truncatedWords + content).replace('...', ' ')}
                 formattedDate={formattedDate}
                 truncatedWords={truncatedWords}
               />
