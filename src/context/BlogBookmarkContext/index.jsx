@@ -12,7 +12,7 @@ const BlogBookmarkProvider = ({ children }) => {
   const [successDelete, setSuccessDelete] = useState(null);
   const searchParams = new URLSearchParams(window.location.search);
   const initialPageIndex = parseInt(searchParams.get('page')) || 1;
-  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  // const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [isLoadingBookmark, setIsLoadingBookmark] = useState(false);
   const [pageIndex, setPageIndex] = useState(initialPageIndex);
   const { authToken } = useContext(BlogAuthContext);
@@ -86,6 +86,7 @@ const BlogBookmarkProvider = ({ children }) => {
 
   const deleteBookmark = async (id) => {
     try {
+      // setIsDeleteLoading(true)
       const response = await fetch(`${BASE_URL}/bookmarks/${id}`, {
         method: 'DELETE',
         headers: {
@@ -110,6 +111,9 @@ const BlogBookmarkProvider = ({ children }) => {
         setErrorDelete('');
       }, 3000);
     } 
+    // finally {
+    //   setIsDeleteLoading(false)
+    // }
   };
   return (
     <BlogBookmarkContext.Provider
@@ -117,7 +121,7 @@ const BlogBookmarkProvider = ({ children }) => {
         bookMark,
         errorDelete,
         successDelete,
-        isDeleteLoading,
+        // isDeleteLoading,
         prevPage,
         nextPage,
         handleArticleNav,
