@@ -1,15 +1,15 @@
-import React, { /* useContext, */ useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 import Search from '../Search';
-// import { BlogContext } from '../../context/BlogContext';
+import { BlogContext } from '../../context/BlogContext';
 
 const Navbar = () => {
   const { toggleDarkMode, isDark } = useTheme();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [prevScrollPosition, setPrevScrollPosition] = useState(0);
-  // const { authToken } = useContext(BlogContext);
-  // const userId = localStorage.getItem('user_id');
+  const { authToken } = useContext(BlogContext);
+  const userId = localStorage.getItem('user_id');
 
   const handleScroll = () => {
     setPrevScrollPosition(scrollPosition);
@@ -30,14 +30,14 @@ const Navbar = () => {
   const showNav = shouldShowNavbar || scrollDirection === 'up';
   const { pathname } = useLocation();
 
-  // const onClick = (e) => {
-  //   if (e.target.innerText === 'Sign Out') {
-  //     localStorage.removeItem('auth_token');
-  //     localStorage.removeItem('user_id');
-  //     localStorage.removeItem('user_name');
-  //     localStorage.removeItem('user_email');
-  //   }
-  // };
+  const onClick = (e) => {
+    if (e.target.innerText === 'Sign Out') {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('user_name');
+      localStorage.removeItem('user_email');
+    }
+  };
 
   return (
     <>
@@ -68,17 +68,19 @@ const Navbar = () => {
           <Search />
           <div
             className='divlink'
-            style={{ position: 'relative', top: 2, zIndex: -1 }}
+            style={{ position: 'relative', zIndex: -1, display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+           }}
           >
-            {/* <a
+            <a
               className={`navlink ${pathname === '/about' ? 'active' : ''} ${
                 isDark ? 'dark-active' : ''
               }`}
               href={`/bookmark/${userId}`}
+              style={{display: 'none'}}
             >
               Bookmark
-            </a> */}
-            {/* <div onClick={onClick} style={{ display: 'inline' }}>
+            </a>
+            <div onClick={onClick} style={{ display: 'inline' }}>
               <Link
                 className={`navlink ${
                   pathname === '/contact' ? 'active' : ''
@@ -86,6 +88,7 @@ const Navbar = () => {
                 to={
                   pathname === '/auth/login' ? `/auth/register` : '/auth/login'
                 }
+                style={{display: 'none'}}
               >
                 {authToken && pathname !== '/auth/login'
                   ? pathname === '/auth/register'
@@ -95,12 +98,11 @@ const Navbar = () => {
                   ? 'Register'
                   : 'Login'}
               </Link>
-            </div> */}
+            </div>
             <button
               onClick={toggleDarkMode}
               style={{
                 backgroundColor: isDark ? '#ffffffde' : '#1111119b',
-                // backgroundColor: isDark ? 'var(--color-transparent-button-disable)' : 'var(--transparent-navbar)',
                 border: isDark ? '1px solid #fff' : '1px solid #333',
                 color: isDark ? '#000' : '#fff',
                 height: 30,
