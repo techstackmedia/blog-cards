@@ -99,6 +99,10 @@ const BlogDetail = () => {
     (item) => item.id === +id
   );
 
+  useEffect(() => {
+    document.title = restaurant?.attributes?.Name
+  }, [restaurant?.attributes?.Name])
+
   const getNextPage = (index) =>
     index === undefined || !restaurants?.data.length
       ? null

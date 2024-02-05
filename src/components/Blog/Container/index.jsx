@@ -18,6 +18,9 @@ const BlogContainer = ({
   cardDescription,
   identity,
 }) => {
+  useEffect(() => {
+    document.title = 'Blog | Techstack Media'
+  }, [])
   const { restaurants, authToken } = useContext(BlogContext);
   const {deleteBookmark} = useContext(BlogBookmarkContext)
   const userId = localStorage.getItem('user_id');
@@ -150,7 +153,7 @@ const BlogContainer = ({
 
   return (
     <div className={`blog-card ${isDark ? 'dark-blog-card' : ''}`}>
-      <div
+      {/* <div
         onClick={
           pathname === `/bookmark/${userId}`
             ? () => deleteBookmark(item.id)
@@ -173,7 +176,7 @@ const BlogContainer = ({
         >
           {pathname.includes('/bookmark') ? 'Delete' : 'Save'}
         </span>
-      </div>
+      </div> */}
       <div
         className={`blog-card-image ${
           isDark ? 'blog-card-image' : 'dark-blog-card-image'
